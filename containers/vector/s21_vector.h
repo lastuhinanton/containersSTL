@@ -33,15 +33,16 @@ class vector {
     // vector operator=(vector &&v);
 
     size_type size() const;
+    reference at(size_type pos);
 
     
 
   private:
     size_type size_;
     size_type capacity_;
-    value_type *container_;
+    value_type *vector_;
     void NullVector();
-    void InitVector();
+    void InitVector(size_type n);
 
 
 };
