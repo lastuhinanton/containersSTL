@@ -5,33 +5,33 @@ namespace s21 {
 
     
 
-template <typename T>
-class IteratorVector {
-  friend class s21vector<T>;
-  friend class ConstIteratorVector<T>;
+template <class T>
+class VectorIterator {
+  friend class vector<T>;
+  friend class VectorConstIterator<T>;
 
   public:
     using value_type = T;
     using ptr = value_type*;
     using reference = value_type&;
 
-    IteratorVector() { ptr_ = nullptr; }
+    VectorIterator() { ptr_ = nullptr; }
 
   private:
     ptr ptr_;
 };
 
-template <typename T>
-class ConstIteratorVector {
-  friend class s21vector<T>;
-  friend class IteratorVector<T>;
+template <class T>
+class VectorConstIterator {
+  friend class vector<T>;
+  friend class VectorIterator<T>;
 
   public:
     using value_type = T;
     using ptr = value_type*;
     using reference = value_type&;
 
-    ConstIteratorVector() { ptr_ = nullptr; }
+    VectorConstIterator() { ptr_ = nullptr; }
 
   private:
     ptr ptr_;

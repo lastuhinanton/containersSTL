@@ -7,27 +7,41 @@
 namespace s21 {
 
 template <class T>
-class IteratorVector;
+class VectorIterator;
 
 template <class T>
-class ConstIteratorVector;
+class VectorConstIterator;
 
 template <class T>
-class s21vector {
+class vector {
   public:
     using value_type = T;
     using reference = value_type &;
-    using const_reference = const value_type&;
-    using iterator = IteratorVector<value_type>;
-    using const_iterator = ConstIteratorVector<value_type>;
+    using const_reference = const value_type &;
+    using iterator = VectorIterator<value_type>;
+    using const_iterator = VectorConstIterator<value_type>;
     using size_type = std::size_t;
 
-    s21vector() { std::cout << "Hello world!" << std::endl; }
+    vector();
+    vector(size_type n);
+    vector(std::initializer_list<value_type> const &items);
+
+    // vector(const vector &v);
+    // vector(vector &&v);
+    // ~vector();
+
+    // vector operator=(vector &&v);
+
+    size_type size() const;
+
+    
 
   private:
     size_type size_;
     size_type capacity_;
     value_type *container_;
+    void NullVector();
+    void InitVector();
 
 
 };
@@ -35,4 +49,6 @@ class s21vector {
 #include "VectorIterators.h"
 
 }
+
+#include "s21_vector.tpp"
 #endif // S21_VECTOR_H
