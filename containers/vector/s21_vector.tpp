@@ -46,6 +46,11 @@ namespace s21 {
 
     // Vector Capacity
     template <class value_type>
+    bool vector<value_type>::empty() const {
+      return size() == 0;
+    }
+
+    template <class value_type>
     typename vector<value_type>::size_type vector<value_type>::size() const {
         return size_;
     }
@@ -54,6 +59,11 @@ namespace s21 {
     typename vector<value_type>::size_type vector<value_type>::max_size() const {
       return std::numeric_limits<size_type>::max() / sizeof(size_type);
     }
+
+    // template <class value_type>
+    // void vector<value_type>::reserve(size_type size) {
+    //   s21::vector<value_type> new
+    // }
 
 
     // Vector Element access
@@ -70,5 +80,5 @@ namespace s21 {
 
     // Vector Modifiers
 
-    
+
 }

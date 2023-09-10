@@ -34,7 +34,7 @@ class vector {
     // vector operator=(vector &&v);
 
     // Vector Capacity
-    // bool empty();
+    bool empty() const;
     size_type size() const;
     size_type max_size() const;
     // void reserve(size_type size);
@@ -65,7 +65,7 @@ class vector {
     size_type size_;
     size_type capacity_;
     value_type *vector_;
-    
+
     // My own functions
     void NullVector();
     void InitVector(size_type n);

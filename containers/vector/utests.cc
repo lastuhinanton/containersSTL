@@ -43,6 +43,13 @@ TEST(S21MatrixTest, MaxSize) {
   ASSERT_EQ(A.max_size(), B.max_size());
 }
 
+TEST(S21MatrixTest, Empty) {
+  s21::vector<int> A;
+  s21::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  EXPECT_TRUE(A.empty());
+  EXPECT_FALSE(B.empty());
+}
+
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
