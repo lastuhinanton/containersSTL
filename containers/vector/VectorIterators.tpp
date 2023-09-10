@@ -29,9 +29,9 @@ namespace s21 {
     }
 
     template <class value_type>
-    bool VectorIterator<value_type>::operator==(VectorIterator n) { return ptr_ == n.ptr_; }
+    bool VectorIterator<value_type>::operator==(const VectorIterator n) { return ptr_ == n.ptr_; }
 
     template <class value_type>
-    bool VectorIterator<value_type>::operator!=(VectorIterator n) { return ptr_ != n.ptr_; }
-    
+    bool VectorIterator<value_type>::operator!=(const VectorIterator n) { return ptr_ != n.ptr_; }
+
 }

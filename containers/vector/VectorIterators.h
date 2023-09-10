@@ -20,8 +20,8 @@ class VectorIterator {
     VectorIterator& operator+(int n);
     VectorIterator& operator++();
     VectorIterator& operator--();
-    bool operator==(VectorIterator n);
-    bool operator!=(VectorIterator n);
+    bool operator==(const VectorIterator n);
+    bool operator!=(const VectorIterator n);
 
 
   private:
