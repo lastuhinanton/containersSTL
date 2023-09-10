@@ -2,7 +2,7 @@
 
 namespace s21 {
 
-    // main contstructors
+    // Vector Member functions
     template <class value_type>
     vector<value_type>::vector() { NullVector(); }
 
@@ -19,6 +19,8 @@ namespace s21 {
     template <class value_type>
     vector<value_type>::~vector() { DeleteVector(); }
 
+
+    // My own functions
     template <class value_type>
     void vector<value_type>::NullVector() {
         size_ = 0;
@@ -41,6 +43,8 @@ namespace s21 {
       NullVector();
     };
 
+
+    // Vector Capacity
     template <class value_type>
     typename vector<value_type>::size_type vector<value_type>::size() const {
         return size_;
@@ -51,10 +55,20 @@ namespace s21 {
       return std::numeric_limits<size_type>::max() / sizeof(size_type);
     }
 
+
+    // Vector Element access
     template <class value_type>
     typename vector<value_type>::reference vector<value_type>::at(size_type pos) {
       if (pos >= size()) { throw std::out_of_range("[at]: out of range"); }
       return vector_[pos];
     }
 
+
+    // Vector Iterators
+
+
+
+    // Vector Modifiers
+
+    
 }

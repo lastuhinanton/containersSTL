@@ -16,6 +16,7 @@ class VectorConstIterator;
 template <class T>
 class vector {
   public:
+    // Vector Member type
     using value_type = T;
     using reference = value_type &;
     using const_reference = const value_type &;
@@ -23,28 +24,53 @@ class vector {
     using const_iterator = VectorConstIterator<value_type>;
     using size_type = std::size_t;
 
+    // Vector Member functions
     vector();
     vector(size_type n);
     vector(std::initializer_list<value_type> const &items);
-
     // vector(const vector &v);
     // vector(vector &&v);
     ~vector();
-
     // vector operator=(vector &&v);
 
+    // Vector Capacity
+    // bool empty();
     size_type size() const;
     size_type max_size() const;
+    // void reserve(size_type size);
+    // size_type capacity();
+    // void shrink_to_fit();
+
+    // Vector Element access
     reference at(size_type pos);
-    
+    // reference operator[](size_type pos);
+    // const_reference front();
+    // const_reference back();
+    // T* data();
+
+
+    // Vector Iterators
+    // iterator begin();
+    // iterator end();
+
+    // Vector Modifiers
+    // void clear();
+    // iterator insert(iterator pos, const_reference value);
+    // void erase(iterator pos);
+    // void push_back(const_reference value);
+    // void pop_back();
+    // void swap(vector& other);
 
   private:
     size_type size_;
     size_type capacity_;
     value_type *vector_;
+    
+    // My own functions
     void NullVector();
     void InitVector(size_type n);
     void DeleteVector();
+    bool IsNormalVector();
 
 
 };
