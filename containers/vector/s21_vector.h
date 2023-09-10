@@ -23,12 +23,13 @@ class vector {
     using iterator = VectorIterator<value_type>;
     using const_iterator = VectorConstIterator<value_type>;
     using size_type = std::size_t;
+    using pointer = value_type *;
 
     // Vector Member functions
     vector();
     vector(size_type n);
     vector(std::initializer_list<value_type> const &items);
-    vector(const vector &v);
+    // vector(const vector &v);
     // vector(vector &&v);
     ~vector();
     // vector operator=(vector &&v);
@@ -50,8 +51,8 @@ class vector {
 
 
     // Vector Iterators
-    // iterator begin();
-    // iterator end();
+    iterator begin();
+    iterator end();
 
     // Vector Modifiers
     // void clear();
@@ -75,9 +76,8 @@ class vector {
 
 };
 
-#include "VectorIterators.h"
-
 }
 
 #include "s21_vector.tpp"
+#include "VectorIterators.tpp"
 #endif // S21_VECTOR_H

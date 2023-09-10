@@ -17,8 +17,11 @@ namespace s21 {
     }
 
     // template <class value_type>
-    // vector<value_type>::vector(const vector &v) {
+    // vector<value_type>::vector(const vector &v) {       // change on the iterators
     //   InitVector(v.size());
+    //   for (size_type i = 0; i < size(); i++) {
+
+    //   }
     // }
 
     template <class value_type>
@@ -85,7 +88,15 @@ namespace s21 {
 
 
     // Vector Iterators
+    template <class value_type>
+    typename vector<value_type>::iterator vector<value_type>::begin() {
+      return iterator(vector_);
+    }
 
+    template <class value_type>
+    typename vector<value_type>::iterator vector<value_type>::end() {
+      return iterator(vector_ + size_ + 1);
+    }
 
 
     // Vector Modifiers

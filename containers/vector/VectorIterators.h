@@ -3,8 +3,6 @@
 
 namespace s21 {
 
-    
-
 template <class T>
 class VectorIterator {
   friend class vector<T>;
@@ -12,13 +10,22 @@ class VectorIterator {
 
   public:
     using value_type = T;
-    using ptr = value_type*;
+    using pointer = value_type*;
     using reference = value_type&;
 
-    VectorIterator() { ptr_ = nullptr; }
+    VectorIterator();
+    VectorIterator(pointer ptr);
+
+    reference operator*();
+    VectorIterator& operator+(int n);
+    VectorIterator& operator++();
+    VectorIterator& operator--();
+    bool operator==(VectorIterator n);
+    bool operator!=(VectorIterator n);
+
 
   private:
-    ptr ptr_;
+    pointer ptr_;
 };
 
 template <class T>
@@ -28,13 +35,13 @@ class VectorConstIterator {
 
   public:
     using value_type = T;
-    using ptr = value_type*;
+    using pointer = value_type*;
     using reference = value_type&;
 
     VectorConstIterator() { ptr_ = nullptr; }
 
   private:
-    ptr ptr_;
+    pointer ptr_;
 
 };
 
