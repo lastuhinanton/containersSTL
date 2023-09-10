@@ -28,7 +28,7 @@ class vector {
     vector();
     vector(size_type n);
     vector(std::initializer_list<value_type> const &items);
-    // vector(const vector &v);
+    vector(const vector &v);
     // vector(vector &&v);
     ~vector();
     // vector operator=(vector &&v);
@@ -43,7 +43,7 @@ class vector {
 
     // Vector Element access
     reference at(size_type pos);
-    // reference operator[](size_type pos);
+    reference operator[](size_type pos);
     // const_reference front();
     // const_reference back();
     // T* data();

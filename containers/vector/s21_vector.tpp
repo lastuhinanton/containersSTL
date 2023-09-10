@@ -16,6 +16,11 @@ namespace s21 {
       std::copy(items.begin(), items.end(), vector_);
     }
 
+    // template <class value_type>
+    // vector<value_type>::vector(const vector &v) {
+    //   InitVector(v.size());
+    // }
+
     template <class value_type>
     vector<value_type>::~vector() { DeleteVector(); }
 
@@ -62,7 +67,7 @@ namespace s21 {
 
     // template <class value_type>
     // void vector<value_type>::reserve(size_type size) {
-    //   s21::vector<value_type> new
+    //   vector<value_type> new
     // }
 
 
@@ -71,6 +76,11 @@ namespace s21 {
     typename vector<value_type>::reference vector<value_type>::at(size_type pos) {
       if (pos >= size()) { throw std::out_of_range("[at]: out of range"); }
       return vector_[pos];
+    }
+
+    template <class value_type>
+    typename vector<value_type>::reference vector<value_type>::operator[](size_type pos) {
+      return at(pos);
     }
 
 
