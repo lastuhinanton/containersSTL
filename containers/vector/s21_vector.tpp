@@ -4,10 +4,10 @@ namespace s21 {
 
     // main contstructors
     template <class value_type>
-    vector<value_type>::vector() { this->NullVector(); }
+    vector<value_type>::vector() { NullVector(); }
 
     template <class value_type>
-    vector<value_type>::vector(size_type n) { this->InitVector(n); }
+    vector<value_type>::vector(size_type n) { InitVector(n); }
     
     template <class value_type>
     vector<value_type>::vector(std::initializer_list<value_type> const &items) {
@@ -15,6 +15,9 @@ namespace s21 {
       vector_ = new value_type[size_];
       std::copy(items.begin(), items.end(), vector_);
     }
+
+    template <class value_type>
+    vector<value_type>::~vector() { DeleteVector(); }
 
     template <class value_type>
     void vector<value_type>::NullVector() {
@@ -31,8 +34,21 @@ namespace s21 {
     };
 
     template <class value_type>
+    void vector<value_type>::DeleteVector() {
+      if (vector_ != nullptr) {
+        delete[] vector_;
+      }
+      NullVector();
+    };
+
+    template <class value_type>
     typename vector<value_type>::size_type vector<value_type>::size() const {
         return size_;
+    }
+
+    template <class value_type>
+    typename vector<value_type>::size_type vector<value_type>::max_size() const {
+      return std::numeric_limits<size_type>::max() / sizeof(size_type);
     }
 
     template <class value_type>

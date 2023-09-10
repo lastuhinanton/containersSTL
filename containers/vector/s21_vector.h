@@ -2,6 +2,7 @@
 #define S21_VECTOR_H
 
 #include <cmath>
+#include <limits>
 #include <iostream>
 
 namespace s21 {
@@ -28,13 +29,13 @@ class vector {
 
     // vector(const vector &v);
     // vector(vector &&v);
-    // ~vector();
+    ~vector();
 
     // vector operator=(vector &&v);
 
     size_type size() const;
+    size_type max_size() const;
     reference at(size_type pos);
-
     
 
   private:
@@ -43,6 +44,7 @@ class vector {
     value_type *vector_;
     void NullVector();
     void InitVector(size_type n);
+    void DeleteVector();
 
 
 };
