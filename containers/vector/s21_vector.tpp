@@ -19,12 +19,6 @@ namespace s21 {
     template <class value_type>
     vector<value_type>::vector(const vector &v) { CopyVector(v); }
 
-    // template <class value_type>
-    // vector<value_type>::vector(const vector &v) {
-    //   InitVector(v.size());
-    //   std::copy(v.begin(), v.end(), vector_);
-    // }
-
     template <class value_type>
     vector<value_type>::~vector() { DeleteVector(); }
 
