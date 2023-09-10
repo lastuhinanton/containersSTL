@@ -16,12 +16,13 @@ namespace s21 {
       std::copy(items.begin(), items.end(), vector_);
     }
 
-    // template <class value_type>
-    // vector<value_type>::vector(const vector &v) {       // change on the iterators
-    //   InitVector(v.size());
-    //   for (size_type i = 0; i < size(); i++) {
+    template <class value_type>
+    vector<value_type>::vector(const vector &v) { CopyVector(v); }
 
-    //   }
+    // template <class value_type>
+    // vector<value_type>::vector(const vector &v) {
+    //   InitVector(v.size());
+    //   std::copy(v.begin(), v.end(), vector_);
     // }
 
     template <class value_type>
@@ -50,6 +51,26 @@ namespace s21 {
       }
       NullVector();
     };
+
+    template <class value_type>
+    void vector<value_type>::CopyVector(const vector &v) {
+      size_type cursize = v.size();
+      InitVector(cursize);
+      for (size_type i = 0; i < cursize; i++) {
+        vector_[i] = v.vector_[i];
+      }
+    };
+
+    template <class value_type>
+    bool vector<value_type>::operator==(const vector &v) {
+      size_type cursize = size();
+      bool flag = true;
+      if (cursize != v.size()) flag = false;
+      for (size_type i = 0; i < cursize && flag; i++) {
+        if (vector_[i] != v.vector_[i]) flag = false;
+      }
+      return flag;
+    }
 
 
     // Vector Capacity

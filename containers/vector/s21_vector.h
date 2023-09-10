@@ -29,10 +29,13 @@ class vector {
     vector();
     vector(size_type n);
     vector(std::initializer_list<value_type> const &items);
-    // vector(const vector &v);
+    vector(const vector &v);
     // vector(vector &&v);
     ~vector();
     // vector operator=(vector &&v);
+
+    // My own functions
+    bool operator==(const vector &v);
 
     // Vector Capacity
     bool empty() const;
@@ -71,7 +74,7 @@ class vector {
     void NullVector();
     void InitVector(size_type n);
     void DeleteVector();
-    bool IsNormalVector();
+    void CopyVector(const vector &v);
 
 
 };

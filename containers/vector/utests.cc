@@ -37,6 +37,12 @@ TEST(S21MatrixTest, DeleteConstructor) {
   ASSERT_EQ(A.at(6), B.at(6));
 }
 
+TEST(S21MatrixTest, CopyConstructor) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> B(A);
+  EXPECT_TRUE(A == B);
+}
+
 TEST(S21MatrixTest, OperatorAccess) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
