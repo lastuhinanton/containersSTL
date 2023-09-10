@@ -23,7 +23,6 @@ class vector {
     using iterator = VectorIterator<value_type>;
     using const_iterator = VectorConstIterator<value_type>;
     using size_type = std::size_t;
-    using pointer = value_type *;
 
     // Vector Member functions
     vector();
@@ -33,9 +32,6 @@ class vector {
     // vector(vector &&v);
     ~vector();
     // vector operator=(vector &&v);
-
-    // My own functions
-    bool operator==(const vector &v);
 
     // Vector Capacity
     bool empty() const;
@@ -75,6 +71,7 @@ class vector {
     void InitVector(size_type n);
     void DeleteVector();
     void CopyVector(const vector &v);
+    bool operator==(const vector &v);
 
 
 };
