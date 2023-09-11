@@ -36,9 +36,9 @@ class vector {
     bool empty() const;
     size_type size() const;
     size_type max_size() const;
-    void reserve(size_type size);
+    void reserve(size_type n);
     size_type capacity() const;
-    // void shrink_to_fit();
+    void shrink_to_fit();
 
     // Vector Element access
     reference at(size_type pos);

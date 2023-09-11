@@ -3,7 +3,7 @@
 
 int main(void) {
     s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
-    s21::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+    std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
     // std::cout << A.size() << "(A)" << std::endl;
     // std::cout << B.size() << "(B)" << std::endl;
     // s21::vector<int> C;
@@ -24,13 +24,17 @@ int main(void) {
     // std::cout << A.capacity() << std::endl;
     // std::cout << B.capacity() << std::endl;
 
-    std::vector<int> C{1, 2, 3, 4, 5, 6, 7};
-    std::cout << C.size() << " " << C.capacity() << std::endl;
-    C.reserve(10);
-    std::cout << C.size() << " " << C.capacity() << std::endl;
-    C.shrink_to_fit();
-    std::cout << C.size() << " " << C.capacity() << std::endl;
-    C.reserve(3);
-    std::cout << C.size() << " " << C.capacity() << std::endl;
+    // s21::vector<int> C{1, 2, 3, 4, 5, 6, 7};
+    // std::cout << C.size() << " " << C.capacity() << std::endl;
+    // C.reserve(10);
+    // std::cout << C.size() << " " << C.capacity() << std::endl;
+    // C.shrink_to_fit();
+    // std::cout << C.size() << " " << C.capacity() << std::endl;
+    // C.reserve(3);
+    // std::cout << C.size() << " " << C.capacity() << std::endl;
+
+    // auto C = B.front();
+    // std::cout << ++C << std::endl;
+    // *C = 7;
     return 0;
 }

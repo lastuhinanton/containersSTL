@@ -17,7 +17,10 @@ namespace s21 {
     }
 
     template <class value_type>
-    vector<value_type>::vector(const vector &v) { CopyVector(v); }
+    vector<value_type>::vector(const vector &v) {
+      InitVector(v.size());
+      CopyVector(v);
+    }
 
     template <class value_type>
     vector<value_type>::vector(vector &&v) { MoveVector(std::move(v)); }
@@ -43,7 +46,7 @@ namespace s21 {
 
     template <class value_type>
     void vector<value_type>::InitVector(size_type n) {
-      size_ = n;
+      size_ = 0;
       capacity_ = n;
       vector_ = new value_type[n];
     };
@@ -58,9 +61,8 @@ namespace s21 {
 
     template <class value_type>
     void vector<value_type>::CopyVector(const vector &v) {
-      size_type cursize = v.size();
-      InitVector(cursize);
-      for (size_type i = 0; i < cursize; i++) {
+      size_ = v.size();
+      for (size_type i = 0; i < size_; i++) {
         vector_[i] = v.vector_[i];
       }
     };
@@ -101,14 +103,25 @@ namespace s21 {
       return std::numeric_limits<size_type>::max() / sizeof(size_type);
     }
 
-    // template <class value_type>
-    // void vector<value_type>::reserve(size_type size) {
-    //   vector<value_type
-    // }
+    template <class value_type>
+    void vector<value_type>::reserve(size_type n) {
+      if (n > capacity()) {
+        vector<value_type> temp(n);
+        temp.CopyVector(*this);
+        DeleteVector();
+        std::swap(*this, temp);
+      }
+    }
 
     template <class value_type>
     typename vector<value_type>::size_type vector<value_type>::capacity() const {
       return capacity_;
+    }
+
+    template <class value_type>
+    void vector<value_type>::shrink_to_fit() {
+      vector<value_type> temp(*this);
+      std::swap(*this, temp);
     }
 
 
@@ -133,7 +146,7 @@ namespace s21 {
 
     template <class value_type>
     typename vector<value_type>::iterator vector<value_type>::end() {
-      return iterator(vector_ + size_ + 1);
+      return iterator(vector_ + size_);
     }
 
 

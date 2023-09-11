@@ -9,6 +9,9 @@ namespace s21 {
 
     template <class value_type>
     typename VectorIterator<value_type>::reference VectorIterator<value_type>::operator*() { return *ptr_; }
+
+    template <class value_type>
+    typename VectorIterator<value_type>::pointer VectorIterator<value_type>::operator&() { return ptr_; }
     
     template <class value_type>
     VectorIterator<value_type>& VectorIterator<value_type>::operator+(int n) {

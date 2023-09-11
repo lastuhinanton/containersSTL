@@ -16,6 +16,7 @@ class VectorIterator {
     VectorIterator();
     VectorIterator(pointer ptr);
 
+    pointer operator&();
     reference operator*();
     VectorIterator& operator+(int n);
     VectorIterator& operator++();
