@@ -1,52 +1,58 @@
 #ifndef _AVL_TREE_
 #define _AVL_TREE_
-#include <iostream>
 
+namespace s21 {
+
+template <typename T>
 class Node {
  public:
   int balance;
-  int value;
+  T value;
   Node *left = nullptr;
   Node *right = nullptr;
-  Node(int value) : value(value), balance(0){};
+  Node(T value) : value(value), balance(0){};
 };
 
+template <typename T>
 class AVLTree {
  public:
-  AVLTree() : root(nullptr) {}
+  AVLTree() : root(nullptr) {repeate = false;}
   ~AVLTree();
 
-  void print() { printAVLTree(root, 0); }
-  void insert(int value) { root = Insert(root, value); }
-  void remove(int value) { root = Remove(root, value); }
-  int get_min() { return GetMin(root)->value; }
-  int get_max() { return GetMax(root)->value; }
-  bool search(int arg) { return SearchNode(root, arg) != nullptr; }
+  void print() { Print(root); }
+  void insert(T value) { root = Insert(root, value); }
+  void remove(T value) { root = Remove(root, value); }
+  T get_min() { return GetMin(root)->value; }
+  T get_max() { return GetMax(root)->value; }
+  bool search(T arg) { return SearchNode(root, arg) != nullptr; }
   void clear() {
     DeleteTree(root);
     root = nullptr;
   }
-
+  void set_repeate_value(bool t);
  private:
-  Node *root;
-  Node *Insert(Node *root, int value);
-  Node *Remove(Node *root, int value);
-  Node *GetMin(Node *root);
-  Node *GetMax(Node *root);
-  Node *SearchNode(Node *root, int value);
-  void DeleteTree(Node *root);
-  Node *LeftRotation(Node *root);
-  Node *RightRotation(Node *root);
-  Node *Rebalance(Node *root);
-  int GetHeight(Node *root);
-  void UpdateHeight(Node *root);
-  int GetBalance(Node *root);
+  bool repeate;
+  Node<T> *root;
+  Node<T> *Insert(Node<T> *root, T value);
+  Node<T> *Remove(Node<T> *root, T value);
+  Node<T> *GetMin(Node<T> *root);
+  Node<T> *GetMax(Node<T> *root);
+  Node<T> *SearchNode(Node<T> *root, T value);
+  void DeleteTree(Node<T> *root);
+  Node<T> *LeftRotation(Node<T> *root);
+  Node<T> *RightRotation(Node<T> *root);
+  Node<T> *Rebalance(Node<T> *root);
+  int GetHeight(Node<T> *root);
+  void UpdateHeight(Node<T> *root);
+  int GetBalance(Node<T> *root);
 
-  void Print(Node *root);
-  void Swap(Node *A, Node *B);
-  void output(Node *root);
-  void print_n(const Node *p, int n, int level, int prob);
-  void printAVLTree(Node *root, int indent);
+  void Print(Node<T> *root);
+  // void Swap(Node<T> *A, Node<T> *B);
+  // void output(Node<T> *root);
+  // void print_n(const Node<T> *p, int n, int level, int prob);
+  // void printAVLTree(Node<T> *root, int indent);
 };
 
+}  // namespace s21
+#include "avlTree.tcc"
 #endif
