@@ -4,6 +4,7 @@
 int main(void) {
     s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
     std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+    std::vector<int> D;
     // std::cout << A.size() << "(A)" << std::endl;
     // std::cout << B.size() << "(B)" << std::endl;
     // s21::vector<int> C;
@@ -34,7 +35,20 @@ int main(void) {
     // std::cout << C.size() << " " << C.capacity() << std::endl;
 
     // auto C = B.front();
+    // C = 20;
+    // std::cout << B.front() << std::endl;
+    std::cout << A.back() << std::endl;
+    std::cout << B.back() << std::endl;
+
+    auto A1 = A.back();
+    auto B1 = B.back();
+
+    std::cout << A1 + 14 << std::endl;
+    std::cout << B1 + 14 << std::endl;
     // std::cout << ++C << std::endl;
-    // *C = 7;
+    // C = 7;
+    // auto C1 = B.front();
+    // std::cout << ++C1 << std::endl;
+    // std::cout << ++C << std::endl;
     return 0;
 }

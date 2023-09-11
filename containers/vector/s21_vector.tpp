@@ -137,6 +137,16 @@ namespace s21 {
       return at(pos);
     }
 
+    template <class value_type>
+    typename vector<value_type>::const_reference vector<value_type>::front() {
+      return *(begin());
+    }
+
+    template <class value_type>
+    typename vector<value_type>::const_reference vector<value_type>::back() {
+      return *(--end());
+    }
+
 
     // Vector Iterators
     template <class value_type>

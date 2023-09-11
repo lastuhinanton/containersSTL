@@ -18,6 +18,7 @@ class vector {
   public:
     // Vector Member type
     using value_type = T;
+    using pointer  = value_type *;
     using reference = value_type &;
     using const_reference = const value_type &;
     using iterator = VectorIterator<value_type>;
@@ -43,9 +44,9 @@ class vector {
     // Vector Element access
     reference at(size_type pos);
     reference operator[](size_type pos);
-    // const_reference front();
-    // const_reference back();
-    // T* data();
+    const_reference front();
+    const_reference back();
+    pointer data();
 
 
     // Vector Iterators
