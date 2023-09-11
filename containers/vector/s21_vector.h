@@ -29,9 +29,8 @@ class vector {
     vector(size_type n);
     vector(std::initializer_list<value_type> const &items);
     vector(const vector &v);
-    // vector(vector &&v);
+    vector(vector &&v);
     ~vector();
-    // vector operator=(vector &&v);
 
     // Vector Capacity
     bool empty() const;
@@ -52,6 +51,10 @@ class vector {
     // Vector Iterators
     iterator begin();
     iterator end();
+    
+    // Overload operators
+    bool operator==(const vector &v);
+    vector operator=(vector &&v);
 
     // Vector Modifiers
     // void clear();
@@ -71,7 +74,7 @@ class vector {
     void InitVector(size_type n);
     void DeleteVector();
     void CopyVector(const vector &v);
-    bool operator==(const vector &v);
+    void MoveVector(vector &&v);
 
 
 };

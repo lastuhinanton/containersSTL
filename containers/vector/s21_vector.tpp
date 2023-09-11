@@ -20,7 +20,17 @@ namespace s21 {
     vector<value_type>::vector(const vector &v) { CopyVector(v); }
 
     template <class value_type>
+    vector<value_type>::vector(vector &&v) { MoveVector(std::move(v)); }
+
+    template <class value_type>
     vector<value_type>::~vector() { DeleteVector(); }
+
+    template <class value_type>
+    vector<value_type> vector<value_type>::operator=(vector &&v) {
+      DeleteVector();
+      MoveVector(std::move(v));
+      return *this;
+    }
 
 
     // My own functions
@@ -54,6 +64,14 @@ namespace s21 {
         vector_[i] = v.vector_[i];
       }
     };
+
+    template <class value_type>
+    void vector<value_type>::MoveVector(vector &&v) {
+      size_ = v.size_;
+      capacity_ = v.capacity_;
+      vector_ = v.vector_;
+      v.NullVector();
+    }
 
     template <class value_type>
     bool vector<value_type>::operator==(const vector &v) {
