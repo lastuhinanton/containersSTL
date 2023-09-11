@@ -103,8 +103,13 @@ namespace s21 {
 
     // template <class value_type>
     // void vector<value_type>::reserve(size_type size) {
-    //   vector<value_type> new
+    //   vector<value_type
     // }
+
+    template <class value_type>
+    typename vector<value_type>::size_type vector<value_type>::capacity() const {
+      return capacity_;
+    }
 
 
     // Vector Element access

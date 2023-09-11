@@ -36,8 +36,8 @@ class vector {
     bool empty() const;
     size_type size() const;
     size_type max_size() const;
-    // void reserve(size_type size);
-    // size_type capacity();
+    void reserve(size_type size);
+    size_type capacity() const;
     // void shrink_to_fit();
 
     // Vector Element access
