@@ -49,6 +49,7 @@ int main(void) {
     std::cout << A.size() << std::endl;
     A.clear();
     std::cout << A.size() << std::endl;
+    std::cout << (1 == 1) + 1 << std::endl;
     // std::cout << ++C << std::endl;
     // C = 7;
     // auto C1 = B.front();

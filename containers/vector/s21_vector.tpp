@@ -147,6 +147,11 @@ namespace s21 {
       return *(--end());
     }
 
+    template <class value_type>
+    typename vector<value_type>::pointer vector<value_type>::data() {
+      return vector_;
+    }
+
 
     // Vector Iterators
     template <class value_type>
@@ -165,5 +170,11 @@ namespace s21 {
     void vector<value_type>::clear() {
       DeleteVector();
     }
+
+    // template <class value_type>
+    // typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
+    //   vector<value_type> temp(size_ + (size_ == capacity_));
+
+    // }
 
 }

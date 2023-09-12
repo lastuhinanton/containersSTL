@@ -68,7 +68,7 @@ class vector {
   private:
     size_type size_;
     size_type capacity_;
-    value_type *vector_;
+    pointer vector_;
 
     // My own functions
     void NullVector();
