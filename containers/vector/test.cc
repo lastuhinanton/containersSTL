@@ -37,14 +37,18 @@ int main(void) {
     // auto C = B.front();
     // C = 20;
     // std::cout << B.front() << std::endl;
-    std::cout << A.back() << std::endl;
-    std::cout << B.back() << std::endl;
+    // std::cout << A.back() << std::endl;
+    // std::cout << B.back() << std::endl;
 
-    auto A1 = A.back();
-    auto B1 = B.back();
+    // auto A1 = A.back();
+    // auto B1 = B.back();
 
-    std::cout << A1 + 14 << std::endl;
-    std::cout << B1 + 14 << std::endl;
+    // std::cout << A1 + 14 << std::endl;
+    // std::cout << B1 + 14 << std::endl;
+
+    std::cout << A.size() << std::endl;
+    A.clear();
+    std::cout << A.size() << std::endl;
     // std::cout << ++C << std::endl;
     // C = 7;
     // auto C1 = B.front();

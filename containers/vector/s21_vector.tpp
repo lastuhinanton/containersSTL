@@ -161,6 +161,9 @@ namespace s21 {
 
 
     // Vector Modifiers
-
+    template <class value_type>
+    void vector<value_type>::clear() {
+      DeleteVector();
+    }
 
 }
