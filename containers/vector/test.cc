@@ -3,8 +3,12 @@
 
 int main(void) {
     s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+    s21::vector<int> A1{7};
     std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+    std::vector<int> B1{7};
     std::vector<int> D;
+
+    std::cout << B[1] << std::endl;
     // std::cout << A.size() << "(A)" << std::endl;
     // std::cout << B.size() << "(B)" << std::endl;
     // s21::vector<int> C;
@@ -56,12 +60,19 @@ int main(void) {
     // std::cout << ++C1 << std::endl;
     // std::cout << ++C << std::endl;
 
-    std::cout << A.size() << std::endl;
-    A.erase(A.begin());
-    std::cout << A.size() << std::endl;
+    // std::cout << A.size() << A.capacity() << std::endl;
+    // std::cout << A1.size() << A1.capacity() << std::endl;
+    // A.swap(A1);
+    // std::cout << A.size() << A.capacity() << std::endl;
+    // std::cout << A1.size() << A1.capacity() << std::endl;
+    // std::cout << B.size() << B.capacity() << std::endl;
+    // std::cout << B1.size() << B1.capacity() << std::endl;
+    // B.swap(B1);
+    // std::cout << B.size() << B.capacity() << std::endl;
+    // std::cout << B1.size() << B1.capacity() << std::endl;
 
-    std::cout << B.size() << std::endl;
-    B.erase(B.begin());
-    std::cout << B.size() << std::endl;
+    // std::cout << B.size() << std::endl;
+    // B.erase(B.begin());
+    // std::cout << B.size() << std::endl;
     return 0;
 }

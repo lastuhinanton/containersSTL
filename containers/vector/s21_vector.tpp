@@ -203,9 +203,22 @@ namespace s21 {
       std::swap(*this, temp);
     }
 
-    // template <class value_type>
-    // void vector<value_type>::pop_back() {
-    //   size_ -= 1;
-    // }
+    template <class value_type>
+    void vector<value_type>::push_back(const_reference value) { insert(end(), value); }
+
+    template <class value_type>
+    void vector<value_type>::pop_back() { erase(end()); }
+
+    template <class value_type>
+    void vector<value_type>::swap(vector& other) {
+      vector<value_type> temp(capacity_);
+      temp.CopyVector(*this);
+      DeleteVector();
+      InitVector(other.capacity_);
+      CopyVector(other);
+      other.DeleteVector();
+      other.InitVector(temp.capacity_);
+      other.CopyVector(temp);
+    }
 
 }

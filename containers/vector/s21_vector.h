@@ -61,9 +61,9 @@ class vector {
     void clear();
     iterator insert(iterator pos, const_reference value);
     void erase(iterator pos);
-    // void push_back(const_reference value);
-    // void pop_back();
-    // void swap(vector& other);
+    void push_back(const_reference value);
+    void pop_back();
+    void swap(vector& other);
 
   private:
     size_type size_;
