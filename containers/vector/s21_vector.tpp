@@ -171,10 +171,23 @@ namespace s21 {
       DeleteVector();
     }
 
-    // template <class value_type>
-    // typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
-    //   vector<value_type> temp(size_ + (size_ == capacity_));
+    template <class value_type>
+    typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
+      vector<value_type> temp(size_ + (size_ == capacity_));
+      for (iterator i = begin(); i != pos; ++i) {
+        temp.vector_[temp.size_++] = *i;
+      }
+      temp.vector_[temp.size_++] = value;
+      for (iterator i = pos; i != end(); ++i) {
+        temp.vector_[temp.size_++] = *i;
+      }
+      std::swap(*this, temp);
+      return pos;
+    }
 
+    // template <class value_type>
+    // void vector<value_type>::pop_back() {
+    //   size_ -= 1;
     // }
 
 }

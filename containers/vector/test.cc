@@ -46,14 +46,22 @@ int main(void) {
     // std::cout << A1 + 14 << std::endl;
     // std::cout << B1 + 14 << std::endl;
 
-    std::cout << A.size() << std::endl;
-    A.clear();
-    std::cout << A.size() << std::endl;
-    std::cout << (1 == 1) + 1 << std::endl;
+    // std::cout << *(A.data()) << std::endl;
+    // *(A.data()) = 7;
+    // std::cout << *(A.data()) << std::endl;
+    // std::cout << (1 == 1) + 1 << std::endl;
     // std::cout << ++C << std::endl;
     // C = 7;
     // auto C1 = B.front();
     // std::cout << ++C1 << std::endl;
     // std::cout << ++C << std::endl;
+
+    std::cout << A.size() << std::endl;
+    A.insert(A.end(), 21);
+    std::cout << A.size() << std::endl;
+
+    std::cout << B.size() << std::endl;
+    B.insert(B.end(), 21);
+    std::cout << B.size() << std::endl;
     return 0;
 }
