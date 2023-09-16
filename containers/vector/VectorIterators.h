@@ -40,6 +40,15 @@ class VectorConstIterator {
     using reference = value_type&;
 
     VectorConstIterator() { ptr_ = nullptr; }
+    VectorConstIterator(pointer ptr);
+
+    pointer operator&();
+    reference operator*();
+    VectorConstIterator& operator+(int n);
+    VectorConstIterator& operator++();
+    VectorConstIterator& operator--();
+    bool operator==(const VectorConstIterator n);
+    bool operator!=(const VectorConstIterator n);
 
   private:
     pointer ptr_;
