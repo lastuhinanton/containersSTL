@@ -185,6 +185,24 @@ namespace s21 {
       return pos;
     }
 
+    template <class value_type>
+    void vector<value_type>::erase(iterator pos) {
+      vector<value_type> temp(size_);
+      if (pos == begin()) {
+        ++pos;
+      } else {
+        for (iterator i = begin(); i != pos; ++i) {
+          temp.vector_[temp.size_++] = *i;
+        }
+      }
+      if (pos != end()) {
+        for (iterator i = pos; i != end(); ++i) {
+          temp.vector_[temp.size_++] = *i;
+        }
+      }
+      std::swap(*this, temp);
+    }
+
     // template <class value_type>
     // void vector<value_type>::pop_back() {
     //   size_ -= 1;

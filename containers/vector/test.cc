@@ -57,11 +57,11 @@ int main(void) {
     // std::cout << ++C << std::endl;
 
     std::cout << A.size() << std::endl;
-    A.insert(A.end(), 21);
+    A.erase(A.begin());
     std::cout << A.size() << std::endl;
 
     std::cout << B.size() << std::endl;
-    B.insert(B.end(), 21);
+    B.erase(B.begin());
     std::cout << B.size() << std::endl;
     return 0;
 }
