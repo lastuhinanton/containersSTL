@@ -1,5 +1,5 @@
-#ifndef S21_VECTOR_H
-#define S21_VECTOR_H
+#ifndef CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_S21_VECTOR_H
+#define CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_S21_VECTOR_H
 
 #include <cmath>
 #include <limits>
@@ -52,6 +52,8 @@ class vector {
     // Vector Iterators
     iterator begin();
     iterator end();
+    const_iterator cbegin();
+    const_iterator cend();
     
     // Overload operators
     bool operator==(const vector &v);
@@ -84,4 +86,4 @@ class vector {
 
 #include "s21_vector.tpp"
 #include "VectorIterators.tpp"
-#endif // S21_VECTOR_H
+#endif // CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_S21_VECTOR_H

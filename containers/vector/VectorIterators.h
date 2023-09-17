@@ -1,5 +1,5 @@
-#ifndef S21_ITERATORS_H
-#define S21_ITERATORS_H
+#ifndef CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_VECTORITERATORS_H
+#define CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_VECTORITERATORS_H
 
 namespace s21 {
 
@@ -39,16 +39,16 @@ class VectorConstIterator {
     using pointer = value_type*;
     using reference = value_type&;
 
-    VectorConstIterator() { ptr_ = nullptr; }
+    VectorConstIterator();
     VectorConstIterator(pointer ptr);
 
-    pointer operator&();
-    reference operator*();
-    VectorConstIterator& operator+(int n);
+    pointer operator&() const;
+    reference operator*() const;
+    VectorConstIterator operator+(int n) const;
     VectorConstIterator& operator++();
     VectorConstIterator& operator--();
-    bool operator==(const VectorConstIterator n);
-    bool operator!=(const VectorConstIterator n);
+    bool operator==(VectorConstIterator n);
+    bool operator!=(VectorConstIterator n);
 
   private:
     pointer ptr_;
@@ -56,4 +56,4 @@ class VectorConstIterator {
 };
 
 }
-#endif // S21_ITERATORS_H
+#endif // CPP2_S21_CONTAINERS_1_SRC_CONTAINERS_VECTOR_VECTORITERATORS_H

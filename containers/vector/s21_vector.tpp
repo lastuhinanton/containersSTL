@@ -160,8 +160,18 @@ namespace s21 {
     }
 
     template <class value_type>
+    typename vector<value_type>::const_iterator vector<value_type>::cbegin() {
+      return const_iterator(vector_);
+    }
+
+    template <class value_type>
     typename vector<value_type>::iterator vector<value_type>::end() {
       return iterator(vector_ + size_);
+    }
+
+    template <class value_type>
+    typename vector<value_type>::const_iterator vector<value_type>::cend() {
+      return const_iterator(vector_ + size_);
     }
 
 

@@ -7,8 +7,24 @@ int main(void) {
     std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
     std::vector<int> B1{7};
     std::vector<int> D;
+    auto i = A.begin();
+    auto i1 = A.cbegin();
+    auto i2 = A.cbegin();
+    auto b1 = B.begin();
+    auto b2 = B.begin();
+    
+    *i1 = 21;
+    *b1 = 21;
+    // std::cout << *(i1 + 1) << std::endl;
+    // std::cout << *(--i1) << std::endl;
+    std::cout << (i1 == i2) << std::endl;
+    std::cout << (b1 == b2) << std::endl;
+    // std::cout << typeid(i).name() << std::endl;
+    // std::cout << *(A.begin()) << " " << &(A.begin() + 1) << " " << &(A.begin() + 2) << std::endl;
 
-    std::cout << B[1] << std::endl;
+
+
+
     // std::cout << A.size() << "(A)" << std::endl;
     // std::cout << B.size() << "(B)" << std::endl;
     // s21::vector<int> C;
