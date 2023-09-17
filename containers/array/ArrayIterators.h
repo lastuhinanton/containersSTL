@@ -3,10 +3,10 @@
 
 namespace s21 {
 
-template <class T>
+template <class T, std::size_t N>
 class ArrayIterator {
-  friend class array<T>;
-  friend class ArrayConstIterator<T>;
+  friend class array<T, N>;
+  friend class ArrayConstIterator<T, N>;
 
   public:
     using value_type = T;
@@ -29,26 +29,26 @@ class ArrayIterator {
     pointer ptr_;
 };
 
-template <class T>
+template <class T, std::size_t N>
 class ArrayConstIterator {
-  friend class array<T>;
-  friend class ArrayIterator<T>;
+  friend class array<T, N>;
+  friend class ArrayIterator<T, N>;
 
   public:
     using value_type = T;
     using pointer = value_type*;
     using reference = value_type&;
 
-    ArrayConstIterator() { ptr_ = nullptr; }
+    ArrayConstIterator();
     ArrayConstIterator(pointer ptr);
 
-    pointer operator&();
-    reference operator*();
-    ArrayConstIterator& operator+(int n);
+    pointer operator&() const;
+    reference operator*() const;
+    ArrayConstIterator operator+(int n) const;
     ArrayConstIterator& operator++();
     ArrayConstIterator& operator--();
-    bool operator==(const ArrayConstIterator n);
-    bool operator!=(const ArrayConstIterator n);
+    bool operator==(ArrayConstIterator n);
+    bool operator!=(ArrayConstIterator n);
 
   private:
     pointer ptr_;

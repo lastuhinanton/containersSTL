@@ -57,7 +57,7 @@ class vector {
     
     // Overload operators
     bool operator==(const vector &v);
-    vector operator=(vector &&v);
+    vector& operator=(vector &&v);
 
     // Vector Modifiers
     void clear();

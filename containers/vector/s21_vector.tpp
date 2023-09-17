@@ -29,9 +29,11 @@ namespace s21 {
     vector<value_type>::~vector() { DeleteVector(); }
 
     template <class value_type>
-    vector<value_type> vector<value_type>::operator=(vector &&v) {
-      DeleteVector();
-      MoveVector(std::move(v));
+    typename s21::vector<value_type>& vector<value_type>::operator=(vector&& v) {
+      if (this != &v) {
+        DeleteVector();
+        MoveVector(v);
+      }
       return *this;
     }
 

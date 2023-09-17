@@ -1,78 +1,69 @@
-#include "s21_vector.h"
-#include <vector>
+#include "s21_array.h"
+#include <array>
 
 int main(void) {
-    s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
-    s21::vector<int> A1{7};
-    std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
-    std::vector<int> B1{7};
-    std::vector<int> D;
+    s21::array<int, 7> A{111, 2, 3, 21, 5, 6, 7};
+    s21::array<int, 7> A12{1, 2, 3, 4, 21, 6, 7};
+    s21::array<int, 1> A1{7};
+    s21::array<int, 0> A2;
 
-    std::cout << B[1] << std::endl;
-    // std::cout << A.size() << "(A)" << std::endl;
-    // std::cout << B.size() << "(B)" << std::endl;
-    // s21::vector<int> C;
-    // std::cout << C.size() << "(C)"  << std::endl;
-    // C = std::move(B);
-    // std::cout << A.size() << "(A)" << std::endl;
-    // std::cout << B.size() << "(B)" << std::endl;
-    // std::cout << C.size() << "(C)" << std::endl;
-    // // auto itr = A.begin();
-    // std::cout << A.size() << "(A)" << std::endl;
-    // std::cout << B.size() << "(B)" << std::endl;
-    // std::cout << C.size() << "(C)" << std::endl;
-    // // itr + 2;
-    // // std::cout << *itr << std::endl;
-    // std::cout << (A == C) << std::endl;
-    // std::cout << A.size() << std::endl;
-    // std::cout << B.size() << std::endl;
-    // std::cout << A.capacity() << std::endl;
-    // std::cout << B.capacity() << std::endl;
+    std::array<int, 7> B{111, 2, 3, 21, 5, 6, 7};
+    std::array<int, 7> B12{1, 2, 3, 4, 21, 6, 7};
+    std::array<int, 1> B1{7};
+    std::array<int, 0> B2;
+    
+    // std::cout << (A.size() == B.size()) << std::endl;
+    // std::cout << (A1.size() == B1.size()) << std::endl;
+    // std::cout << (A2.size() == B2.size()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (A.empty() == B.empty()) << std::endl;
+    // std::cout << (A1.empty() == B1.empty()) << std::endl;
+    // std::cout << (A2.empty() == B2.empty()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (A.max_size() == B.max_size()) << std::endl;
+    // std::cout << (A1.max_size() == B1.max_size()) << std::endl;
+    // std::cout << (A2.max_size() == B2.max_size()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (A[0] == B[0]) << std::endl;
+    // std::cout << (A1[0] == B1[0]) << std::endl;
+    // // std::cout << (A2[0] == B2[0]) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (A.front() == B.front()) << std::endl;
+    // std::cout << (A1.front() == B1.front()) << std::endl;
+    // // std::cout << (A2.front() == B2.front()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (A.back() == B.back()) << std::endl;
+    // std::cout << (A1.back() == B1.back()) << std::endl;
+    // // std::cout << (A2.back() == B2.back()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (*A.data() == *B.data()) << std::endl;
+    // std::cout << (*A1.data() == *B1.data()) << std::endl;
+    // // std::cout << (A2.data() == B2.data()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (*A.begin() == *B.begin()) << std::endl;
+    // std::cout << (*A1.begin() == *B1.begin()) << std::endl;
+    // // std::cout << (*A2.begin() == *B2.begin()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // // std::cout << (*A.end() == *B.end()) << std::endl;
+    // // std::cout << (*A1.end() == *B1.end()) << std::endl;
+    // // std::cout << (*A2.begin() == *B2.begin()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << (*A.cbegin() == *B.cbegin()) << std::endl;
+    // std::cout << (*A1.cbegin() == *B1.cbegin()) << std::endl;
+    // // std::cout << (*A2.cbegin() == *B2.cbegin()) << std::endl;
+    // std::cout << "===" << std::endl;
+    // A = A12;
+    // std::cout << &B << std::endl;
+    // std::cout << &B12 << std::endl;
+    // B = B12;
+    // std::cout << &B << std::endl;
+    // std::cout << &B12 << std::endl;
+    // std::cout << (A.size() == B.size()) << std::endl;
+    std::cout << "===" << std::endl;
+    std::cout << "===" << std::endl;
+    std::cout << "===" << std::endl;
+    std::cout << "===" << std::endl;
 
-    // s21::vector<int> C{1, 2, 3, 4, 5, 6, 7};
-    // std::cout << C.size() << " " << C.capacity() << std::endl;
-    // C.reserve(10);
-    // std::cout << C.size() << " " << C.capacity() << std::endl;
-    // C.shrink_to_fit();
-    // std::cout << C.size() << " " << C.capacity() << std::endl;
-    // C.reserve(3);
-    // std::cout << C.size() << " " << C.capacity() << std::endl;
 
-    // auto C = B.front();
-    // C = 20;
-    // std::cout << B.front() << std::endl;
-    // std::cout << A.back() << std::endl;
-    // std::cout << B.back() << std::endl;
-
-    // auto A1 = A.back();
-    // auto B1 = B.back();
-
-    // std::cout << A1 + 14 << std::endl;
-    // std::cout << B1 + 14 << std::endl;
-
-    // std::cout << *(A.data()) << std::endl;
-    // *(A.data()) = 7;
-    // std::cout << *(A.data()) << std::endl;
-    // std::cout << (1 == 1) + 1 << std::endl;
-    // std::cout << ++C << std::endl;
-    // C = 7;
-    // auto C1 = B.front();
-    // std::cout << ++C1 << std::endl;
-    // std::cout << ++C << std::endl;
-
-    // std::cout << A.size() << A.capacity() << std::endl;
-    // std::cout << A1.size() << A1.capacity() << std::endl;
-    // A.swap(A1);
-    // std::cout << A.size() << A.capacity() << std::endl;
-    // std::cout << A1.size() << A1.capacity() << std::endl;
-    // std::cout << B.size() << B.capacity() << std::endl;
-    // std::cout << B1.size() << B1.capacity() << std::endl;
-    // B.swap(B1);
-    // std::cout << B.size() << B.capacity() << std::endl;
-    // std::cout << B1.size() << B1.capacity() << std::endl;
-
-    // std::cout << B.size() << std::endl;
-    // B.erase(B.begin());
-    // std::cout << B.size() << std::endl;
     return 0;
 }

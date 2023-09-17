@@ -4,11 +4,11 @@ GCC=-Wall -Werror -Wextra -lstdc++ -std=c++17 #-fsanitize=address
 all: clean library test
 
 build:
-	gcc -c ${GCC} utests.cc -o vector.o
+	gcc -c ${GCC} utests.cc -o array.o
 
 library: build
 	rm -rf library.a
-	ar rcs library.a vector.o
+	ar rcs library.a array.o
 	ranlib library.a
 
 test: library

@@ -7,13 +7,13 @@
 
 namespace s21 {
 
-template <class T>
-class arrayIterator;
+template <class T, std::size_t N>
+class ArrayIterator;
 
-template <class T>
-class arrayConstIterator;
+template <class T, std::size_t N>
+class ArrayConstIterator;
 
-template <class T>
+template <class T, std::size_t N>
 class array {
   public:
     // Array Member type
@@ -21,13 +21,12 @@ class array {
     using pointer  = value_type *;
     using reference = value_type &;
     using const_reference = const value_type &;
-    using iterator = ArrayIterator<value_type>;
-    using const_iterator = ArrayConstIterator<value_type>;
+    using iterator = ArrayIterator<value_type, N>;
+    using const_iterator = ArrayConstIterator<value_type, N>;
     using size_type = std::size_t;
 
     // Array Member functions
     array();
-    array(size_type n);
     array(std::initializer_list<value_type> const &items);
     array(const array &v);
     array(array &&v);
@@ -49,6 +48,8 @@ class array {
     // Array Iterators
     iterator begin();
     iterator end();
+    const_iterator cbegin();
+    const_iterator cend();
     
     // Overload operators
     bool operator==(const array &v);
@@ -63,7 +64,7 @@ class array {
 
     // My own functions
     void NullArray();
-    void InitArray(size_type n);
+    void InitArray();
     void DeleteArray();
     void CopyArray(const array &v);
     void MoveArray(array &&v);
