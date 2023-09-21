@@ -177,12 +177,7 @@ namespace s21
         void splice(const_iterator pos, list &other);
 
     private:
-        // Support functions
-        //  void change_end();
-        // void quick_sort(iterator left, iterator right);
-        // iterator partition(iterator first, iterator last);
-        //  void copy(const list& l);
-        // void print_list();
+
     };
 }
 #endif // S21_LIST_H
