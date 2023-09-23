@@ -29,10 +29,11 @@ namespace s21 {
     vector<value_type>::~vector() { DeleteVector(); }
 
     template <class value_type>
-    typename s21::vector<value_type>& vector<value_type>::operator=(vector&& v) {
+    typename s21::vector<value_type>& vector<value_type>::operator=(const vector &v) {
       if (this != &v) {
         DeleteVector();
-        MoveVector(v);
+        InitVector(v.size());
+        CopyVector(v);
       }
       return *this;
     }
@@ -48,7 +49,7 @@ namespace s21 {
 
     template <class value_type>
     void vector<value_type>::InitVector(size_type n) {
-      size_ = 0;
+      size_ = n;
       capacity_ = n;
       vector_ = new value_type[n];
     };
@@ -63,8 +64,8 @@ namespace s21 {
 
     template <class value_type>
     void vector<value_type>::CopyVector(const vector &v) {
-      size_ = v.size();
-      for (size_type i = 0; i < size_; i++) {
+      size_type temp = v.size();
+      for (size_type i = 0; i < temp; i++) {
         vector_[i] = v.vector_[i];
       }
     };
@@ -108,10 +109,12 @@ namespace s21 {
     template <class value_type>
     void vector<value_type>::reserve(size_type n) {
       if (n > capacity()) {
+        size_type size_temp = size();
         vector<value_type> temp(n);
         temp.CopyVector(*this);
         DeleteVector();
         std::swap(*this, temp);
+        size_ = size_temp;
       }
     }
 
@@ -183,43 +186,38 @@ namespace s21 {
       DeleteVector();
     }
 
-    template <class value_type>
-    typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
-      vector<value_type> temp(size_ + (size_ == capacity_));
-      for (iterator i = begin(); i != pos; ++i) {
-        temp.vector_[temp.size_++] = *i;
-      }
-      temp.vector_[temp.size_++] = value;
-      for (iterator i = pos; i != end(); ++i) {
-        temp.vector_[temp.size_++] = *i;
-      }
-      std::swap(*this, temp);
-      return pos;
-    }
+    // template <class value_type>
+    // typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
+    //   vector<value_type> temp(size_ + (size_ == capacity_));
+    //   for (iterator i = begin(); i != pos; ++i) {
+    //     temp.vector_[temp.size_++] = *i;
+    //   }
+    //   temp.vector_[temp.size_++] = value;
+    //   for (iterator i = pos; i != end(); ++i) {
+    //     temp.vector_[temp.size_++] = *i;
+    //   }
+    //   std::swap(*this, temp);
+    //   return pos;
+    // }
 
-    template <class value_type>
-    void vector<value_type>::erase(iterator pos) {
-      vector<value_type> temp(size_);
-      if (pos == begin()) {
-        ++pos;
-      } else {
-        for (iterator i = begin(); i != pos; ++i) {
-          temp.vector_[temp.size_++] = *i;
-        }
-      }
-      if (pos != end()) {
-        for (iterator i = pos; i != end(); ++i) {
-          temp.vector_[temp.size_++] = *i;
-        }
-      }
-      std::swap(*this, temp);
-    }
+    // template <class value_type>
+    // void vector<value_type>::erase(iterator pos) {
+    //   if (size_ == 1) {
+    //     vector<value_type> temp(1);
+    //     temp.size_ = 0;
+    //   } else {
+    //     vector<value_type> temp(size_);
+    //   }
+    //   std::swap(*this, temp);
+    // }
 
     template <class value_type>
     void vector<value_type>::push_back(const_reference value) { insert(end(), value); }
 
     template <class value_type>
-    void vector<value_type>::pop_back() { erase(end()); }
+    void vector<value_type>::pop_back() {
+      erase(--end());
+    }
 
     template <class value_type>
     void vector<value_type>::swap(vector& other) {

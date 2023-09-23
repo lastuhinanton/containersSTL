@@ -4,9 +4,36 @@
 int main(void) {
     s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
     s21::vector<int> A1{7};
-    s21::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+    std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
     std::vector<int> B1{7};
-    std::vector<int> D;
+    
+
+    // std::cout << A.back() << " " << A1.back() << std::endl;
+    // A.pop_back();
+    // A1.pop_back();
+    // std::cout << A.back() << " " << A1.back() << std::endl;
+
+    A.insert(A1.begin(), 21);
+
+    std::cout << A.size() << std::endl;
+
+
+    // std::cout << B1.back() << std::endl;
+    // std::cout << B1.size() << " " << B1.capacity() << std::endl;
+    // B1.pop_back();
+    // std::cout << B1.back() << std::endl;
+    // std::cout << B1.size() << " " << B1.capacity() << std::endl;
+
+    // std::cout << A.size() << " " << A1.size() << std::endl;
+    // std::cout << B.size() << " " << B1.size() << std::endl;
+
+    // A1 = std::move(A);
+    // B1 = B;
+    // std::cout << A.size() << " " << A1.size() << std::endl;
+    // std::cout << B.size() << " " << B1.size() << std::endl;
+    // std::cout << B.capacity() << " " << B1.capacity() << std::endl;
+
+    // A2 = A;
 
     // auto i = A.begin();
     // auto i1 = A.cbegin();
