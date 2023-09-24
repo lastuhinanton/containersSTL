@@ -182,49 +182,79 @@ namespace s21 {
 
     // Vector Modifiers
     template <class value_type>
-    void vector<value_type>::clear() {
-      DeleteVector();
+    void vector<value_type>::clear() { DeleteVector(); }
+
+    template <class value_type>
+    typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
+      vector<value_type> temp(capacity_ + (size_ == capacity_));
+      iterator index_temp = temp.begin();
+      iterator index = begin();
+      if (begin() == pos) {
+        *index_temp = value;
+        ++index_temp;
+      }
+      for (; index != pos && index != end(); ++index) {
+        *index_temp = *index;
+        ++index_temp;
+      }
+      if (begin() != pos) {
+        *index_temp = value;
+        ++index_temp;
+      }
+      for (; index != end(); ++index) {
+        *index_temp = *index;
+        ++index_temp;
+      }
+      temp.size_ = size_ + 1;
+      std::swap(*this, temp);
+      return pos;
     }
 
-    // template <class value_type>
-    // typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
-    //   vector<value_type> temp(size_ + (size_ == capacity_));
-    //   for (iterator i = begin(); i != pos; ++i) {
-    //     temp.vector_[temp.size_++] = *i;
-    //   }
-    //   temp.vector_[temp.size_++] = value;
-    //   for (iterator i = pos; i != end(); ++i) {
-    //     temp.vector_[temp.size_++] = *i;
-    //   }
-    //   std::swap(*this, temp);
-    //   return pos;
-    // }
+    template <class value_type>
+    void vector<value_type>::erase(iterator pos) {
 
-    // template <class value_type>
-    // void vector<value_type>::erase(iterator pos) {
-    //   if (size_ == 1) {
-    //     vector<value_type> temp(1);
-    //     temp.size_ = 0;
-    //   } else {
-    //     vector<value_type> temp(size_);
-    //   }
-    //   std::swap(*this, temp);
-    // }
+      if (pos == end() && size_ == 0) { throw std::out_of_range("out of range"); }
+
+      vector<value_type> temp(capacity_);
+
+      if (begin() != --end()) {
+        iterator index_temp = temp.begin();
+        iterator index = begin();
+
+        if (begin() == pos) {
+          ++index;
+        }
+        for (; index != pos && index != end(); ++index) {
+          *index_temp = *index;
+          ++index_temp;
+        }
+        if (begin() != pos) {
+          ++index;
+        }
+        for (; index != end(); ++index) {
+          *index_temp = *index;
+          ++index_temp;
+        }
+      }
+
+      temp.size_ = size_ - 1;
+      swap(temp);
+    }
 
     template <class value_type>
     void vector<value_type>::push_back(const_reference value) { insert(end(), value); }
 
     template <class value_type>
-    void vector<value_type>::pop_back() {
-      erase(--end());
-    }
+    void vector<value_type>::pop_back() { erase(--end()); }
 
     template <class value_type>
     void vector<value_type>::swap(vector& other) {
       vector<value_type> temp(capacity_);
       temp.CopyVector(*this);
+      temp.size_ = size();
       DeleteVector();
       InitVector(other.capacity_);
+      size_ = other.size();
       CopyVector(other);
       other.DeleteVector();
       other.InitVector(temp.capacity_);

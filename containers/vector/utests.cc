@@ -144,13 +144,145 @@ TEST(S21MatrixTest, FrontBackData) {
 TEST(S21MatrixTest, PushPopBack) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> A1{1};
+  std::vector<int> B1{1};
+
   ASSERT_EQ(A.back(), B.back());
   A.pop_back();
   B.pop_back();
-  // ASSERT_EQ(A.back(), B.back());
-  // A.push_back(21);
-  // B.push_back(21);
-  // ASSERT_EQ(A.back(), B.back());
+  ASSERT_EQ(A.back(), B.back());
+  A.push_back(21);
+  B.push_back(21);
+  ASSERT_EQ(A.back(), B.back());
+}
+
+TEST(S21MatrixTest, ClearContents) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> A1{1};
+  std::vector<int> B1{1};
+
+  A.clear();
+  A1.clear();
+  B.clear();
+  B1.clear();
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+}
+
+TEST(S21MatrixTest, EraseContent) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> A1{1};
+  std::vector<int> B1{1};
+
+  A.erase(A.begin());
+  A1.erase(A1.begin());
+  B.erase(B.begin());
+  B1.erase(B1.begin());
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A.capacity(), B.capacity());
+  ASSERT_EQ(A1.size(), B1.size());
+  ASSERT_EQ(A1.capacity(), B1.capacity());
+
+  A.push_back(21);
+  A1.push_back(21);
+  B.push_back(21);
+  B1.push_back(21);
+
+  A.erase(--A.end());
+  A1.erase(--A1.end());
+  B.erase(--B.end());
+  B1.erase(--B1.end());
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A.capacity(), B.capacity());
+  ASSERT_EQ(A1.size(), B1.size());
+  ASSERT_EQ(A1.capacity(), B1.capacity());
+}
+
+TEST(S21MatrixTest, InsertContent) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> A1{1};
+  std::vector<int> B1{1};
+
+  A.insert(A.begin(), 21);
+  A1.insert(A1.begin(), 21);
+  B.insert(B.begin(), 21);
+  B1.insert(B1.begin(), 21);
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+
+  A.push_back(21);
+  A1.push_back(21);
+  B.push_back(21);
+  B1.push_back(21);
+
+  A.insert(A.end(), 21);
+  A1.insert(A1.end(), 21);
+  B.insert(B.end(), 21);
+  B1.insert(B1.end(), 21);
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+}
+
+TEST(S21MatrixTest, SwapContent) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+  s21::vector<int> A1{1};
+  std::vector<int> B1{1};
+
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+
+  A.swap(A1);
+  std::swap(B, B1);
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+  
+  A.swap(A1);
+  std::swap(B, B1);
+  
+  ASSERT_EQ(A.size(), B.size());
+  ASSERT_EQ(A1.size(), B1.size());
+}
+
+TEST(S21MatrixTest, VectorIterator) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+
+  auto A_iterator = A.begin();
+  auto A1_iterator = A.begin();
+  auto B_iterator = B.begin();
+  A_iterator = A_iterator + 2;
+  B_iterator = B_iterator + 2;
+
+  ASSERT_EQ(*A_iterator, *B_iterator);
+  ASSERT_EQ(&A_iterator, &A_iterator);
+  ASSERT_TRUE(A_iterator == A_iterator);
+  ASSERT_TRUE(A_iterator != A1_iterator);
+}
+
+TEST(S21MatrixTest, VectorConstIterator) {
+  s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+  std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+
+  auto A_iterator = A.cbegin();
+  auto A1_iterator = A.cbegin();
+  auto B_iterator = B.cbegin();
+
+  A_iterator = A_iterator + 2;
+  B_iterator = B_iterator + 2;
+
+  ASSERT_EQ(*A_iterator, *B_iterator);
+  ASSERT_EQ(&A_iterator, &A_iterator);
+  ASSERT_TRUE(A_iterator == A_iterator);
+  ASSERT_TRUE(A_iterator != A1_iterator);
 }
 
 int main(int argc, char *argv[]) {

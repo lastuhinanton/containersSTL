@@ -3,9 +3,9 @@
 
 int main(void) {
     s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
-    s21::vector<int> A1{7};
+    s21::vector<int> A1{9};
     std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
-    std::vector<int> B1{7};
+    std::vector<int> B1{9};
     
 
     // std::cout << A.back() << " " << A1.back() << std::endl;
@@ -13,10 +13,29 @@ int main(void) {
     // A1.pop_back();
     // std::cout << A.back() << " " << A1.back() << std::endl;
 
-    A.insert(A1.begin(), 21);
+    // std::cout << A1.size() << A1.capacity() << std::endl;
+    // for (auto t = A1.begin(); t != A1.end(); ++t) {
+    //     std::cout << *t << " ";
+    // }
+    // std::cout << std::endl;
+    // A1.erase(--A1.end());
+    // for (auto t = A1.begin(); t != A1.end(); ++t) {
+    //     std::cout << *t << " ";
+    // }
+    // std::cout << std::endl;
+    // std::cout << A1.size() << A1.capacity() << std::endl;
 
-    std::cout << A.size() << std::endl;
+    std::cout << B1.size() << std::endl;
+    B1.pop_back();
+    std::cout << B1.size() << std::endl;
 
+    // std::cout << A.capacity() << A.size() << " " << A1.capacity() << A1.size() << std::endl;
+    // A1.reserve(21);
+    // std::cout << A.capacity() << A.size() << " " << A1.capacity() << A1.size() << std::endl;
+    // std::cout << A1.back() << std::endl;
+    // A.swap(A1);
+    // std::cout << A.capacity() << A.size() << " " << A1.capacity() << A1.size()  << std::endl;
+    // std::cout << A1.back() << std::endl;
 
     // std::cout << B1.back() << std::endl;
     // std::cout << B1.size() << " " << B1.capacity() << std::endl;
