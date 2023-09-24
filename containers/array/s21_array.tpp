@@ -9,7 +9,7 @@ namespace s21 {
     template <class value_type, std::size_t N>
     array<value_type, N>::array(std::initializer_list<value_type> const &items) {
       size_ = N;
-      array_ = new value_type[size_];
+      array_ = new value_type[N];
       std::copy(items.begin(), items.end(), array_);
     }
 
