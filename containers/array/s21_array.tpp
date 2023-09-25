@@ -4,7 +4,7 @@ namespace s21 {
 
     // array Member functions
     template <class value_type, std::size_t N>
-    array<value_type, N>::array() { NullArray(); }
+    array<value_type, N>::array() { InitArray(); }
     
     template <class value_type, std::size_t N>
     array<value_type, N>::array(std::initializer_list<value_type> const &items) {
@@ -84,12 +84,12 @@ namespace s21 {
     // array
     template <class value_type, std::size_t N>
     bool array<value_type, N>::empty() const {
-      return N == 0;
+      return size_ == 0;
     }
 
     template <class value_type, std::size_t N>
     typename array<value_type, N>::size_type array<value_type, N>::size() const {
-        return N;
+        return size_;
     }
 
     template <class value_type, std::size_t N>
@@ -146,6 +146,7 @@ namespace s21 {
       return const_iterator(array_ + size_);
     }
 
+    // Array Modifiers
     template <class value_type, std::size_t N>
     void array<value_type, N>::swap(array& other) {
       array<value_type, N> temp(size_);
@@ -156,6 +157,11 @@ namespace s21 {
       other.DeleteArray();
       other.InitArray();
       other.CopyArray(temp);
+    }
+
+    template <class value_type, std::size_t N>
+    void array<value_type, N>::fill(const_reference value) {
+      for (iterator i = begin(); i != end(); ++i) { *i = value; }
     }
 
 }

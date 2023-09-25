@@ -57,6 +57,7 @@ class array {
 
     // Array Modifiers
     void swap(array& other);
+    void fill(const_reference value);
 
   private:
     size_type size_;

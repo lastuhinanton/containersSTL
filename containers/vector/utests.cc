@@ -51,6 +51,8 @@ TEST(S21MatrixTest, MoveConstructor) {
   
   ASSERT_EQ(A.size(), B.size());
   ASSERT_EQ(A.capacity(), B.capacity());
+  ASSERT_EQ(A_test.size(), B_test.size());
+  ASSERT_EQ(A_test.capacity(), B_test.capacity());
 }
 
 TEST(S21VectorTest, Empty) {
