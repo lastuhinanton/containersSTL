@@ -53,7 +53,6 @@ class array {
     
     // Overload operators
     bool operator==(const array &v);
-    array operator=(array &&v);
 
     // Array Modifiers
     void swap(array& other);

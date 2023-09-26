@@ -24,16 +24,7 @@ namespace s21 {
 
     template <class value_type, std::size_t N>
     array<value_type, N>::~array() { DeleteArray(); }
-
-    template <class value_type, std::size_t N>
-    array<value_type, N> array<value_type, N>::operator=(array &&v) {
-      for (int i = 0; i < N; ++i) {
-        array_[i] = std::move(v.array_[i]);
-      }
-      return *this;
-    }
-
-
+    
     // My own functions
     template <class value_type, std::size_t N>
     void array<value_type, N>::NullArray() {
@@ -51,6 +42,7 @@ namespace s21 {
     void array<value_type, N>::DeleteArray() {
       if (array_ != nullptr) {
         delete[] array_;
+        array_ = nullptr;
       }
       NullArray();
     };
@@ -149,8 +141,7 @@ namespace s21 {
     // Array Modifiers
     template <class value_type, std::size_t N>
     void array<value_type, N>::swap(array& other) {
-      array<value_type, N> temp(size_);
-      temp.CopyArray(*this);
+      array<value_type, N> temp(other);
       DeleteArray();
       InitArray();
       CopyArray(other);
