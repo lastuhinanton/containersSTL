@@ -2,10 +2,10 @@
 #include <vector>
 
 int main(void) {
-    s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
-    s21::vector<int> A1{9};
-    std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
-    std::vector<int> B1{9};
+    // s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
+    // s21::vector<int> A1{9};
+    // std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
+    // std::vector<int> B1{9};
     
 
     // std::cout << A.back() << " " << A1.back() << std::endl;
@@ -25,9 +25,9 @@ int main(void) {
     // std::cout << std::endl;
     // std::cout << A1.size() << A1.capacity() << std::endl;
 
-    std::cout << B1.size() << std::endl;
-    B1.pop_back();
-    std::cout << B1.size() << std::endl;
+    // std::cout << B1.size() << std::endl;
+    // B1.pop_back();
+    // std::cout << B1.size() << std::endl;
 
     // std::cout << A.capacity() << A.size() << " " << A1.capacity() << A1.size() << std::endl;
     // A1.reserve(21);

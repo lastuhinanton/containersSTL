@@ -1,21 +1,21 @@
 #include <gtest/gtest.h>
 #include "s21_vector.h"
 
-TEST(S21MatrixTest, DefaultConstructor) {
+TEST(S21VectorTest, DefaultConstructor) {
   s21::vector<int> A;
   std::vector<int> B;
   ASSERT_EQ(A.size(), B.size());
   ASSERT_EQ(A.capacity(), B.capacity());
 }
 
-TEST(S21MatrixTest, SizeConstructor) {
+TEST(S21VectorTest, SizeConstructor) {
   s21::vector<int> A(21);
   std::vector<int> B(21);
   ASSERT_EQ(A.size(), B.size());
   ASSERT_EQ(A.capacity(), B.capacity());
 }
 
-TEST(S21MatrixTest, LightArrayConstructor) {
+TEST(S21VectorTest, LightArrayConstructor) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   ASSERT_EQ(A.at(0), B.at(0));
@@ -29,7 +29,7 @@ TEST(S21MatrixTest, LightArrayConstructor) {
   ASSERT_EQ(A.capacity(), B.capacity());
 }
 
-TEST(S21MatrixTest, CopyConstructor) {
+TEST(S21VectorTest, CopyConstructor) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A_test(A);
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
@@ -42,7 +42,7 @@ TEST(S21MatrixTest, CopyConstructor) {
   EXPECT_TRUE(B == B_test);
 }
 
-TEST(S21MatrixTest, MoveConstructor) {
+TEST(S21VectorTest, MoveConstructor) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A_test(std::move(A));
 
@@ -135,7 +135,7 @@ TEST(S21VectorTest, ReserveCapacityShrink) {
   EXPECT_TRUE(A1.max_size() == B1.max_size());
 }
 
-TEST(S21MatrixTest, FrontBackData) {
+TEST(S21VectorTest, FrontBackData) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   ASSERT_EQ(A.front(), B.front());
@@ -143,7 +143,7 @@ TEST(S21MatrixTest, FrontBackData) {
   ASSERT_EQ(*A.data(), *B.data());
 }
 
-TEST(S21MatrixTest, PushPopBack) {
+TEST(S21VectorTest, PushPopBack) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A1{1};
@@ -158,7 +158,7 @@ TEST(S21MatrixTest, PushPopBack) {
   ASSERT_EQ(A.back(), B.back());
 }
 
-TEST(S21MatrixTest, ClearContents) {
+TEST(S21VectorTest, ClearContents) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A1{1};
@@ -172,7 +172,7 @@ TEST(S21MatrixTest, ClearContents) {
   ASSERT_EQ(A1.size(), B1.size());
 }
 
-TEST(S21MatrixTest, EraseContent) {
+TEST(S21VectorTest, EraseContent) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A1{1};
@@ -204,7 +204,7 @@ TEST(S21MatrixTest, EraseContent) {
   ASSERT_EQ(A1.capacity(), B1.capacity());
 }
 
-TEST(S21MatrixTest, InsertContent) {
+TEST(S21VectorTest, InsertContent) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A1{1};
@@ -232,7 +232,7 @@ TEST(S21MatrixTest, InsertContent) {
   ASSERT_EQ(A1.size(), B1.size());
 }
 
-TEST(S21MatrixTest, SwapContent) {
+TEST(S21VectorTest, SwapContent) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
   s21::vector<int> A1{1};
@@ -254,7 +254,7 @@ TEST(S21MatrixTest, SwapContent) {
   ASSERT_EQ(A1.size(), B1.size());
 }
 
-TEST(S21MatrixTest, VectorIterator) {
+TEST(S21VectorTest, VectorIterator) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
 
@@ -270,7 +270,7 @@ TEST(S21MatrixTest, VectorIterator) {
   ASSERT_TRUE(A_iterator != A1_iterator);
 }
 
-TEST(S21MatrixTest, VectorConstIterator) {
+TEST(S21VectorTest, VectorConstIterator) {
   s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
   std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
 
@@ -286,6 +286,7 @@ TEST(S21MatrixTest, VectorConstIterator) {
   ASSERT_TRUE(A_iterator == A_iterator);
   ASSERT_TRUE(A_iterator != A1_iterator);
 }
+
 
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);

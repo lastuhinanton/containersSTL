@@ -47,8 +47,8 @@ class ArrayConstIterator {
     ArrayConstIterator operator+(int n) const;
     ArrayConstIterator& operator++();
     ArrayConstIterator& operator--();
-    bool operator==(ArrayConstIterator n);
-    bool operator!=(ArrayConstIterator n);
+    bool operator==(ArrayConstIterator n) const;
+    bool operator!=(ArrayConstIterator n) const;
 
   private:
     pointer ptr_;

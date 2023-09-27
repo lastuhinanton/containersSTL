@@ -48,11 +48,13 @@ class array {
     // Array Iterators
     iterator begin();
     iterator end();
-    const_iterator cbegin();
-    const_iterator cend();
+    const_iterator cbegin() const;
+    const_iterator cend() const;
     
     // Overload operators
     bool operator==(const array &v);
+    array &operator=(const array &v);
+    array &operator=(array &&v);
 
     // Array Modifiers
     void swap(array& other);

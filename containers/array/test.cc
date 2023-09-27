@@ -2,15 +2,27 @@
 #include <array>
 
 int main(void) {
-    s21::array<int, 7> A{111, 2, 3, 21, 5, 6, 7};
-    s21::array<int, 7> A12{1, 2, 3, 4, 21, 6, 7};
-    s21::array<int, 1> A1{7};
-    s21::array<int, 0> A2;
+    // s21::array<int, 7> A{111, 2, 3, 21, 5, 6, 7};
+    // s21::array<int, 7> A12{1, 2, 3, 4, 21, 6, 7};
+    // s21::array<int, 1> A1{7};
+    // s21::array<int, 0> A2;
 
-    std::array<int, 7> B{111, 2, 3, 21, 5, 6, 7};
-    std::array<int, 7> B12{1, 2, 3, 4, 21, 6, 7};
-    std::array<int, 1> B1{7};
-    std::array<int, 0> B2;
+    // std::array<int, 7> B{111, 2, 3, 21, 5, 6, 7};
+    // std::array<int, 7> B12{1, 2, 3, 4, 21, 6, 7};
+    // std::array<int, 1> B1{7};
+    // std::array<int, 0> B2;
+
+
+    s21::array<int, 5> arr1 = {1, 2, 3, 4, 5};
+    s21::array<int, 5> arr2 = {6, 7, 8, 9, 10};
+    arr1.swap(arr2);
+    for (size_t i = 0; i < arr1.size(); ++i) {
+        std::cout << arr1[i] << " ";
+    }
+    std::cout << std::endl;
+    for (size_t i = 0; i < arr2.size(); ++i) {
+        std::cout << arr2[i] << " ";
+    }
     
     // std::cout << (A.size() == B.size()) << std::endl;
     // std::cout << (A1.size() == B1.size()) << std::endl;
@@ -59,10 +71,10 @@ int main(void) {
     // std::cout << &B << std::endl;
     // std::cout << &B12 << std::endl;
     // std::cout << (A.size() == B.size()) << std::endl;
-    std::cout << "===" << std::endl;
-    std::cout << "===" << std::endl;
-    std::cout << "===" << std::endl;
-    std::cout << "===" << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << "===" << std::endl;
+    // std::cout << "===" << std::endl;
 
 
     return 0;

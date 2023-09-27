@@ -74,9 +74,9 @@ namespace s21 {
     }
 
     template <class value_type, std::size_t N>
-    bool ArrayConstIterator<value_type, N>::operator==(ArrayConstIterator n) { return ptr_ == n.ptr_; }
+    bool ArrayConstIterator<value_type, N>::operator==(const ArrayConstIterator n) const { return ptr_ == n.ptr_; }
 
     template <class value_type, std::size_t N>
-    bool ArrayConstIterator<value_type, N>::operator!=(ArrayConstIterator n) { return ptr_ != n.ptr_; }
+    bool ArrayConstIterator<value_type, N>::operator!=(const ArrayConstIterator n) const { return ptr_ != n.ptr_; }
 
 }

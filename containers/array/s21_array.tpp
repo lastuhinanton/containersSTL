@@ -36,6 +36,7 @@ namespace s21 {
     void array<value_type, N>::InitArray() {
       size_ = N;
       array_ = new value_type[size_];
+      fill(0);
     };
 
     template <class value_type, std::size_t N>
@@ -60,6 +61,22 @@ namespace s21 {
       size_ = N;
       array_ = v.array_;
       v.NullArray();
+    }
+
+    template <class value_type, std::size_t N>
+    typename array<value_type, N>::array &array<value_type, N>::operator=(const array &v) {
+      for (size_t i = 0; i < N; ++i) {
+        array_[i] = v.array_[i];
+      }
+      return *this;
+    }
+
+    template <class value_type, std::size_t N>
+    typename array<value_type, N>::array &array<value_type, N>::operator=(array &&v) {
+      for (size_t i = 0; i < N; ++i) {
+        array_[i] = std::move(v.array_[i]);
+      }
+      return *this;
     }
 
     template <class value_type, std::size_t N>
@@ -129,19 +146,19 @@ namespace s21 {
     }
 
     template <class value_type, std::size_t N>
-    typename array<value_type, N>::const_iterator array<value_type, N>::cbegin() {
+    typename array<value_type, N>::const_iterator array<value_type, N>::cbegin() const {
       return const_iterator(array_);
     }
 
     template <class value_type, std::size_t N>
-    typename array<value_type, N>::const_iterator array<value_type, N>::cend() {
+    typename array<value_type, N>::const_iterator array<value_type, N>::cend() const {
       return const_iterator(array_ + size_);
     }
 
     // Array Modifiers
     template <class value_type, std::size_t N>
     void array<value_type, N>::swap(array& other) {
-      array<value_type, N> temp(other);
+      array<value_type, N> temp(*this);
       DeleteArray();
       InitArray();
       CopyArray(other);
