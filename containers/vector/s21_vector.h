@@ -58,6 +58,7 @@ class vector {
     // Overload operators
     bool operator==(const vector &v);
     vector& operator=(const vector &v);
+    vector& operator=(vector &&v);
 
     // Vector Modifiers
     void clear();
@@ -78,6 +79,7 @@ class vector {
     void DeleteVector();
     void CopyVector(const vector &v);
     void MoveVector(vector &&v);
+    void fill(const_reference value);
 
 
 };

@@ -38,6 +38,16 @@ namespace s21 {
       return *this;
     }
 
+    template <class value_type>
+    typename s21::vector<value_type>& vector<value_type>::operator=(vector &&v) {
+      if (this != &v) {
+        DeleteVector();
+        swap(v);
+        v.NullVector();
+      }
+      return *this;
+    }
+
 
     // My own functions
     template <class value_type>
@@ -52,6 +62,7 @@ namespace s21 {
       size_ = n;
       capacity_ = n;
       vector_ = new value_type[n];
+      fill(0);
     };
 
     template <class value_type>
@@ -113,7 +124,7 @@ namespace s21 {
         vector<value_type> temp(n);
         temp.CopyVector(*this);
         DeleteVector();
-        std::swap(*this, temp);
+        swap(temp);
         size_ = size_temp;
       }
     }
@@ -126,7 +137,7 @@ namespace s21 {
     template <class value_type>
     void vector<value_type>::shrink_to_fit() {
       vector<value_type> temp(*this);
-      std::swap(*this, temp);
+      swap(temp);
     }
 
 
@@ -206,7 +217,7 @@ namespace s21 {
         ++index_temp;
       }
       temp.size_ = size_ + 1;
-      std::swap(*this, temp);
+      swap(temp);
       return pos;
     }
 
@@ -259,6 +270,11 @@ namespace s21 {
       other.DeleteVector();
       other.InitVector(temp.capacity_);
       other.CopyVector(temp);
+    }
+
+    template <class value_type>
+    void vector<value_type>::fill(const_reference value) {
+      for (iterator i = begin(); i != end(); ++i) { *i = value; }
     }
 
 }
