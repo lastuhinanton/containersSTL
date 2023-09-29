@@ -422,38 +422,38 @@ TEST(VectorTest, IndexOperator_InvalidIndex) {
   EXPECT_ANY_THROW(v[10]);
 }
 
-// TEST(VectorTest, ConstIndexOperator_ValidIndex) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   EXPECT_EQ(v[0], 1);
-//   EXPECT_EQ(v[2], 3);
-//   EXPECT_EQ(v[4], 5);
-// }
+TEST(VectorTest, ConstIndexOperator_ValidIndex) {
+  const s21::vector<int> v = {1, 2, 3, 4, 5};
+  EXPECT_EQ(v[0], 1);
+  EXPECT_EQ(v[2], 3);
+  EXPECT_EQ(v[4], 5);
+}
 
-// TEST(VectorTest, ConstIndexOperator_InvalidIndex) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   EXPECT_ANY_THROW(v[5]);
-//   EXPECT_ANY_THROW(v[10]);
-// }
+TEST(VectorTest, ConstIndexOperator_InvalidIndex) {
+  const s21::vector<int> v = {1, 2, 3, 4, 5};
+  EXPECT_ANY_THROW(v[5]);
+  EXPECT_ANY_THROW(v[10]);
+}
 
-// TEST(VectorTest, FrontConst_ValidVector) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   EXPECT_EQ(v.front(), 1);
-// }
+TEST(VectorTest, FrontConst_ValidVector) {
+  const s21::vector<int> v = {1, 2, 3, 4, 5};
+  EXPECT_EQ(v.front(), 1);
+}
 
-// TEST(VectorTest, FrontConst_EmptyVector) {
-//   const s21::vector<int> v;
-//   EXPECT_THROW(v.front(), std::out_of_range);
-// }
+TEST(VectorTest, FrontConst_EmptyVector) {
+  const s21::vector<int> v;
+  EXPECT_THROW(v.front(), std::out_of_range);
+}
 
-// TEST(VectorTest, BackConst_ValidVector) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   EXPECT_EQ(v.back(), 5);
-// }
+TEST(VectorTest, BackConst_ValidVector) {
+  const s21::vector<int> v = {1, 2, 3, 4, 5};
+  EXPECT_EQ(v.back(), 5);
+}
 
-// TEST(VectorTest, BackConst_EmptyVector) {
-//   const s21::vector<int> v;
-//   EXPECT_THROW(v.back(), std::out_of_range);
-// }
+TEST(VectorTest, BackConst_EmptyVector) {
+  const s21::vector<int> v;
+  EXPECT_THROW(v.back(), std::out_of_range);
+}
 
 TEST(VectorTest, Data_ValidVector) {
   s21::vector<int> v = {1, 2, 3, 4, 5};
@@ -477,39 +477,11 @@ TEST(VectorTest, Begin_ValidVector) {
   EXPECT_EQ(v[0], 10);
 }
 
-// TEST(VectorTest, CBegin_ValidVector) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   auto it = v.cbegin();
-//   EXPECT_EQ(*it, 1);
-//   // Modify the data through the iterator and check if the vector is not updated
-//   // (should be const_iterator) Uncommenting the following line should result in
-//   // a compilation error. *it = 10;
-// }
-
-// TEST(VectorTest, CBegin_EmptyVector) {
-//   const s21::vector<int> v;
-//   auto it = v.cbegin();
-//   // The cbegin() of an empty vector should be the cend() too, so iterator
-//   // should be equal to cend()
-//   EXPECT_EQ(it, v.cend());
-// }
-
-// TEST(VectorTest, CEnd_ValidVector) {
-//   const s21::vector<int> v = {1, 2, 3, 4, 5};
-//   auto it = v.cend();
-//   // cend() iterator should not be dereferenced; comparing it to another
-//   // iterator should work
-//   auto beginIt = v.cbegin();
-//   EXPECT_EQ(it, beginIt + 5);
-// }
-
-// TEST(VectorTest, CEnd_EmptyVector) {
-//   const s21::vector<int> v;
-//   auto it = v.cend();
-//   // The cend() of an empty vector should be the cbegin() too, so iterator
-//   // should be equal to cbegin()
-//   EXPECT_EQ(it, v.cbegin());
-// }
+TEST(VectorTest, CBegin_ValidVector) {
+  const s21::vector<int> v = {1, 2, 3, 4, 5};
+  auto it = v.cbegin();
+  EXPECT_EQ(*it, 1);
+}
 
 TEST(VectorTest, Empty_EmptyVector) {
   const s21::vector<int> v;
@@ -553,18 +525,15 @@ TEST(VectorTest, Reserve_DecreaseCapacity) {
   EXPECT_GE(v.capacity(), newCapacity);
 }
 
-// TEST(VectorTest, Capacity_EmptyVector) {
-//   const s21::vector<int> v;
-//   // The capacity of an empty vector should be at least 0
-//   EXPECT_GE(v.capacity(), 0);
-// }
+TEST(VectorTest, Capacity_EmptyVector) {
+  const s21::vector<int> v;
+  EXPECT_GE(v.capacity(), 0);
+}
 
-// TEST(VectorTest, Capacity_NonEmptyVector) {
-//   const s21::vector<int> v = {1, 2, 3};
-//   // The capacity of a non-empty vector might vary, but it should be at least
-//   // the size of the vector
-//   EXPECT_GE(v.capacity(), v.size());
-// }
+TEST(VectorTest, Capacity_NonEmptyVector) {
+  const s21::vector<int> v = {1, 2, 3};
+  EXPECT_GE(v.capacity(), v.size());
+}
 
 TEST(VectorTest, ShrinkToFit_EmptyVector) {
   s21::vector<int> v;

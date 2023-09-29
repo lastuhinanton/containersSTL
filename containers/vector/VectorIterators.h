@@ -37,7 +37,7 @@ class VectorConstIterator {
   public:
     using value_type = T;
     using pointer = value_type*;
-    using reference = value_type&;
+    using reference = const value_type&;
 
     VectorConstIterator();
     VectorConstIterator(pointer ptr);

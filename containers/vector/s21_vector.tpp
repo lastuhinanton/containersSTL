@@ -144,23 +144,44 @@ namespace s21 {
     // Vector Element access
     template <class value_type>
     typename vector<value_type>::reference vector<value_type>::at(size_type pos) {
-      if (pos >= size()) { throw std::out_of_range("[at]: out of range"); }
+      if (pos >= size()) { throw std::out_of_range("out of range"); }
       return vector_[pos];
     }
 
     template <class value_type>
     typename vector<value_type>::reference vector<value_type>::operator[](size_type pos) {
-      return at(pos);
+      if (pos >= size()) { throw std::out_of_range("out of range"); }
+      return vector_[pos];
+    }
+
+    template <class value_type>
+    typename vector<value_type>::const_reference vector<value_type>::operator[](size_type pos) const {
+      if (pos >= size()) { throw std::out_of_range("out of range"); }
+      return vector_[pos];
     }
 
     template <class value_type>
     typename vector<value_type>::const_reference vector<value_type>::front() {
-      return *(begin());
+      if (size_ == 0) { throw std::out_of_range("out of range"); }
+      return vector_[0];
+    }
+
+    template <class value_type>
+    typename vector<value_type>::const_reference vector<value_type>::front() const {
+      if (size_ == 0) { throw std::out_of_range("out of range"); }
+      return vector_[0];
     }
 
     template <class value_type>
     typename vector<value_type>::const_reference vector<value_type>::back() {
-      return *(--end());
+      if (size_ == 0) { throw std::out_of_range("out of range"); }
+      return vector_[size_ - 1];
+    }
+
+    template <class value_type>
+    typename vector<value_type>::const_reference vector<value_type>::back() const {
+      if (size_ == 0) { throw std::out_of_range("out of range"); }
+      return vector_[size_ - 1];
     }
 
     template <class value_type>
@@ -176,7 +197,7 @@ namespace s21 {
     }
 
     template <class value_type>
-    typename vector<value_type>::const_iterator vector<value_type>::cbegin() {
+    typename vector<value_type>::const_iterator vector<value_type>::cbegin() const {
       return const_iterator(vector_);
     }
 
@@ -186,7 +207,7 @@ namespace s21 {
     }
 
     template <class value_type>
-    typename vector<value_type>::const_iterator vector<value_type>::cend() {
+    typename vector<value_type>::const_iterator vector<value_type>::cend() const {
       return const_iterator(vector_ + size_);
     }
 

@@ -2,6 +2,9 @@
 #include <vector>
 
 int main(void) {
+    const s21::vector<int> v = {1, 2, 3, 4, 5};
+    std::cout << v[0] << std::endl;
+    v[0] = 21;
     // s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
     // s21::vector<int> A1{9};
     // std::vector<int> B{1, 2, 3, 4, 5, 6, 7};

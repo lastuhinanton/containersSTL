@@ -48,12 +48,17 @@ class vector {
     const_reference back();
     pointer data();
 
+    //Vector Element constant access
+    const_reference operator[](size_type pos) const;
+    const_reference front() const;
+    const_reference back() const;
+
 
     // Vector Iterators
     iterator begin();
     iterator end();
-    const_iterator cbegin();
-    const_iterator cend();
+    const_iterator cbegin() const;
+    const_iterator cend() const;
     
     // Overload operators
     bool operator==(const vector &v);
