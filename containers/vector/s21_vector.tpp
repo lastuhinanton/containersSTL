@@ -298,4 +298,24 @@ namespace s21 {
       for (iterator i = begin(); i != end(); ++i) { *i = value; }
     }
 
+    // Bonus part
+    template <class value_type>
+    template <typename... Args>
+    typename vector<value_type>::iterator vector<value_type>::insert_many(const_iterator pos, Args&&... args) {
+      vector<value_type> tmp{args...};
+      for (size_t i = 0; i < tmp.size(); ++i) {
+        std::cout << *(tmp.begin() + i) << std::endl;
+      }
+      iterator cur_pos = begin() + (&pos - &cbegin());
+      for (size_t i = 0; i < tmp.size(); ++i) {
+        cur_pos = insert(cur_pos, tmp[i]);
+        ++cur_pos;
+      }
+      
+      // for (iterator t = tmp.begin(); t != tmp.end(); ++t) {
+      //   std::cout << std::endl;
+      //   ++ret;
+      // }
+      return cur_pos;
+    }
 }

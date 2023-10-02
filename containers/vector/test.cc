@@ -2,14 +2,32 @@
 #include <vector>
 
 int main(void) {
-    const s21::vector<int> v = {1, 2, 3, 4, 5};
-    std::cout << v[0] << std::endl;
-    v[0] = 21;
+    s21::vector<int> v = {1, 2, 3, 4, 5};
+    // for (auto i = v.begin(); i != v.end(); ++i) {
+    //     std::cout << *i;
+    // }
+    // std::cout << std::endl;
+    // auto start = v.begin() + 2;
+    // std::cout << *start << std::endl;
+    // v.insert(start, 7);
+    // for (auto i = v.begin(); i != v.end(); ++i) {
+    //     std::cout << *i;
+    // }
+    // std::cout << std::endl << *start;
+    // std::cout << *(v.cbegin() + 4) << std::endl;
+
+    // std::cout << v.size() << v.capacity() << std::endl;
+    v.insert_many(v.cbegin(), 1, 2, 3, 4, 5, 6, 7);
+    std::cout <<std::endl;
+    for (auto i = v.begin(); i != v.end(); ++i) {
+        std::cout << *i;
+    }
+
     // s21::vector<int> A{1, 2, 3, 4, 5, 6, 7};
     // s21::vector<int> A1{9};
     // std::vector<int> B{1, 2, 3, 4, 5, 6, 7};
     // std::vector<int> B1{9};
-    
+
 
     // std::cout << A.back() << " " << A1.back() << std::endl;
     // A.pop_back();
