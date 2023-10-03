@@ -249,15 +249,15 @@ TEST(ArrayTest, End) {
   EXPECT_EQ(&it, &(beginIt + 5));
 }
 
-// TEST(ArrayTest, CBegin) {
-//   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-//   auto it = arr.cbegin();
-//   EXPECT_EQ(*it, 1);
-//   // Attempting to modify data through a const_iterator should result in a
-//   // compilation error Uncommenting the following line should result in a
-//   // compilation error.
-//   *&it = 10;
-// }
+TEST(ArrayTest, CBegin) {
+  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
+  auto it = arr.cbegin();
+  EXPECT_EQ(*it, 1);
+  // Attempting to modify data through a const_iterator should result in a
+  // compilation error Uncommenting the following line should result in a
+  // compilation error.
+  // *&it = 10;
+}
 
 TEST(ArrayTest, CEnd) {
   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
