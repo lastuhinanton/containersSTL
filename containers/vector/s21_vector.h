@@ -77,6 +77,9 @@ class vector {
     template <typename... Args>
     iterator insert_many(const_iterator pos, Args&&... args);
 
+    template <typename... Args>
+    void insert_many_back(Args&&... args);
+
   private:
     size_type size_;
     size_type capacity_;

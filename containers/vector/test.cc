@@ -2,10 +2,11 @@
 #include <vector>
 
 int main(void) {
-    s21::vector<int> v = {1, 2, 3, 4, 5};
-    // for (auto i = v.begin(); i != v.end(); ++i) {
-    //     std::cout << *i;
-    // }
+    s21::vector<int> v = {7, 2, 3, 4, 5};
+    for (auto i = v.begin(); i != v.end(); ++i) {
+        std::cout << *i;
+    }
+    std::cout << std::endl;
     // std::cout << std::endl;
     // auto start = v.begin() + 2;
     // std::cout << *start << std::endl;
@@ -15,10 +16,9 @@ int main(void) {
     // }
     // std::cout << std::endl << *start;
     // std::cout << *(v.cbegin() + 4) << std::endl;
-
     // std::cout << v.size() << v.capacity() << std::endl;
-    v.insert_many(v.cbegin(), 1, 2, 3, 4, 5, 6, 7);
-    std::cout <<std::endl;
+    v.insert_many_back(5, 4, 3, 2, 1);
+    std::cout << std::endl;
     for (auto i = v.begin(); i != v.end(); ++i) {
         std::cout << *i;
     }

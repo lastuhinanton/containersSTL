@@ -218,6 +218,7 @@ namespace s21 {
 
     template <class value_type>
     typename vector<value_type>::iterator vector<value_type>::insert(iterator pos, const_reference value) {
+      size_type temp_ret = &pos - &begin();
       vector<value_type> temp(capacity_ + (size_ == capacity_));
       iterator index_temp = temp.begin();
       iterator index = begin();
@@ -239,7 +240,7 @@ namespace s21 {
       }
       temp.size_ = size_ + 1;
       swap(temp);
-      return pos;
+      return begin() + temp_ret;
     }
 
     template <class value_type>
@@ -302,20 +303,21 @@ namespace s21 {
     template <class value_type>
     template <typename... Args>
     typename vector<value_type>::iterator vector<value_type>::insert_many(const_iterator pos, Args&&... args) {
-      vector<value_type> tmp{args...};
-      for (size_t i = 0; i < tmp.size(); ++i) {
-        std::cout << *(tmp.begin() + i) << std::endl;
+      vector<value_type> temp{args...};
+      iterator ret = begin() + (&pos - &cbegin());
+      for (size_t i = 0; i < temp.size(); ++i) {
+        ret = insert(ret, temp[i]);
+        ++ret;
       }
-      iterator cur_pos = begin() + (&pos - &cbegin());
-      for (size_t i = 0; i < tmp.size(); ++i) {
-        cur_pos = insert(cur_pos, tmp[i]);
-        ++cur_pos;
+      return ret;
+    }
+
+    template <class value_type>
+    template <typename... Args>
+    void vector<value_type>::insert_many_back(Args&&... args) {
+      vector<value_type> temp{args...};
+      for (size_t i = 0; i < temp.size(); ++i) {
+        insert(end(), temp[i]);
       }
-      
-      // for (iterator t = tmp.begin(); t != tmp.end(); ++t) {
-      //   std::cout << std::endl;
-      //   ++ret;
-      // }
-      return cur_pos;
     }
 }
