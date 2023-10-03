@@ -1,293 +1,354 @@
 #include "s21_list.h"
-namespace s21 {
-//  List Functions
-template <typename T>
-list <T>::list() : end_(nullptr), size_(0) {
-  initialization();
-}
-
-template <typename T>
-list <T>::list(size_type n) : end_(nullptr), size_(0) {
-if (n >= max_size())
-    throw std::out_of_range("Limit of the container is exceeded");
-  initialization();
-  for (; n > 0; --n) {
-    push_back(this->end_->value_);
-  }
-}
-
-template <typename T>
-list <T>::list(std::initializer_list <T> const& items) : end_(nullptr), size_(0) {
- initialization();
-  for (const auto& item : items) {
-    push_back(item);
-  }
-}
-
-template <typename T>
-list <T>::list(const list& l) : end_(nullptr), size_(0) {
- initialization();
-  *this = l;
-}
-
-template <typename T>
-void list <T>::initialization() {
-  end_ = new Node<T>();
-  if (!end_) {
-    throw std::bad_alloc();
-  }
-  end_->next_ = end_;
-  end_->prev_ = end_;
-  size_ = 0;
-}
-
-template <typename T>
-list <T>::list(list&& l) : end_(nullptr), size_(0) {
-    if (this == &l) {
-    throw std::invalid_argument("Error move!");
-  }
-  initialization();
-  swap(l);
-}
-
-template <typename T>
-list <T>::~list() {
-  clear();
-  delete end_;
-}
-
-template <typename T>
-typename list <T>::list& list <T>::operator=(list&& l) {
-  if (this != &l) {
-    clear();
-    swap(l);
-  }
-  return *this;
-}
-
-template <typename T>
-list <T>& list <T>::operator=(const list& other) {
-  if (this != &other) {
-    clear();
-    Node<T>* tmp = other.end_->next_;
-    if (!tmp) {
-      throw std::bad_alloc();
-    }
-    for (size_type i = 0; i < other.size_; ++i) {
-      push_back(tmp->value_);
-      tmp = tmp->next_;
-    }
-  }
-  return *this;
-}
-// List Element access
-
-template <typename T>
-typename list <T>::const_reference list <T>::front() {
-  return this->end_->next_->value_;
-}
- 
-template <typename T>
-typename list <T>::const_reference list <T>::back() {
-  return this->end_->prev_->value_;
-}
-
-// List Iterators
-template <typename T>
-typename list<T>::iterator list <T>::begin() const {
- return iterator(this->end_->next_);
-}
-
-template <typename T>
-typename list <T>::iterator list <T>::end() const {
-  return iterator(this->end_);
-}
-
-// List Capacity
-template <typename T>
-bool list <T>::empty() {
-  return size_ == 0;
-}
-
-template <typename T>
-typename list<T>::size_type list <T>::size() {
-  return size_;
-}
-
-template <typename T>
-typename list <T>::size_type list <T>::max_size() {
-  return (std::numeric_limits<size_type>::max() / sizeof(Node<T>) / 2);
-}
-
-// List Modifiers
-template <typename T>
-void list <T>::clear() {
-  while (!empty()) {
-    pop_back();
-  }
-}
-
-template <typename T>
-typename list <T>::iterator list <T>::insert(iterator pos, const_reference value) {
-  Node<T>* element = pos.ptr_;
-  Node<T>* convertion = new Node(value);
-  convertion->next_ = element;
-  convertion->prev_ = element->prev_;
-  element->prev_->next_ = convertion;
-  element->prev_ = convertion;
-  size_++;
-  return iterator(convertion);
+namespace s21
+{
+  //  List Functions
+  template <typename T>
+  list<T>::list() : end_(nullptr), size_(0)
+  {
+    initialization();
   }
 
   template <typename T>
-  void list <T>::erase(iterator pos) {
-    if(pos == end()) {
+  list<T>::list(size_type n) : end_(nullptr), size_(0)
+  {
+    if (n >= max_size())
+      throw std::out_of_range("Limit of the container is exceeded");
+    initialization();
+    for (; n > 0; --n)
+    {
+      push_back(this->end_->value_);
+    }
+  }
+
+  template <typename T>
+  list<T>::list(std::initializer_list<T> const &items) : end_(nullptr), size_(0)
+  {
+    initialization();
+    for (const auto &item : items)
+    {
+      push_back(item);
+    }
+  }
+
+  template <typename T>
+  list<T>::list(const list &l) : end_(nullptr), size_(0)
+  {
+    initialization();
+    *this = l;
+  }
+
+  template <typename T>
+  void list<T>::initialization()
+  {
+    end_ = new Node<T>();
+    if (!end_)
+    {
+      throw std::bad_alloc();
+    }
+    end_->next_ = end_;
+    end_->prev_ = end_;
+    size_ = 0;
+  }
+
+  template <typename T>
+  list<T>::list(list &&l) : end_(nullptr), size_(0)
+  {
+    if (this == &l)
+    {
+      throw std::invalid_argument("Error move!");
+    }
+    initialization();
+    swap(l);
+  }
+
+  template <typename T>
+  list<T>::~list()
+  {
+    clear();
+    delete end_;
+  }
+
+  template <typename T>
+  typename list<T>::list &list<T>::operator=(list &&l)
+  {
+    if (this != &l)
+    {
+      clear();
+      swap(l);
+    }
+    return *this;
+  }
+
+  template <typename T>
+  list<T> &list<T>::operator=(const list &other)
+  {
+    if (this != &other)
+    {
+      clear();
+      Node<T> *tmp = other.end_->next_;
+      if (!tmp)
+      {
+        throw std::bad_alloc();
+      }
+      for (size_type i = 0; i < other.size_; ++i)
+      {
+        push_back(tmp->value_);
+        tmp = tmp->next_;
+      }
+    }
+    return *this;
+  }
+  // List Element access
+
+  template <typename T>
+  typename list<T>::const_reference list<T>::front()
+  {
+    return this->end_->next_->value_;
+  }
+
+  template <typename T>
+  typename list<T>::const_reference list<T>::back()
+  {
+    return this->end_->prev_->value_;
+  }
+
+  // List Iterators
+  template <typename T>
+  typename list<T>::iterator list<T>::begin() const
+  {
+    return iterator(this->end_->next_);
+  }
+
+  template <typename T>
+  typename list<T>::iterator list<T>::end() const
+  {
+    return iterator(this->end_);
+  }
+
+  // List Capacity
+  template <typename T>
+  bool list<T>::empty()
+  {
+    return size_ == 0;
+  }
+
+  template <typename T>
+  typename list<T>::size_type list<T>::size()
+  {
+    return size_;
+  }
+
+  template <typename T>
+  typename list<T>::size_type list<T>::max_size()
+  {
+    return (std::numeric_limits<size_type>::max() / sizeof(Node<T>) / 2);
+  }
+
+  // List Modifiers
+  template <typename T>
+  void list<T>::clear()
+  {
+    while (!empty())
+    {
+      pop_back();
+    }
+  }
+
+  template <typename T>
+  typename list<T>::iterator list<T>::insert(iterator pos, const_reference value)
+  {
+    Node<T> *element = pos.ptr_;
+    Node<T> *new_value = new Node(value);
+    new_value->next_ = element;
+    new_value->prev_ = element->prev_;
+    element->prev_->next_ = new_value;
+    element->prev_ = new_value;
+    size_++;
+    return iterator(new_value);
+  }
+
+  template <typename T>
+  void list<T>::erase(iterator pos)
+  {
+    if (pos == end())
+    {
       throw std::invalid_argument("Invalid argument");
     }
-  Node<T>* element = pos.ptr_;
-  element->prev_->next_ = element->next_;
-  element->next_->prev_ = element->prev_;
-  delete element;
-  size_--;
-}
-
-template <typename T>
-void list <T>::push_back(const_reference value) {
-    if (size() >= max_size())
-    throw std::out_of_range("Limit of the container is exceeded");
-  Node<T>* tmp = new Node(value);
-  if (!tmp) throw std::bad_alloc();
-  tmp->next_ = end_;
-  tmp->prev_ = end_->prev_;
-  end_->prev_->next_ = tmp;
-  end_->prev_ = tmp;
-  size_++;
-}
-
-template <typename T>
-void list <T>::pop_back() {
-    if (empty()) throw std::invalid_argument("the list is empty");
-  Node<T>* tmp;
-  tmp = end_->prev_;
-  end_->prev_ = end_->prev_->prev_;
-  end_->prev_->next_ = end_;
-  delete tmp;
-  size_--;
-}
-
-template <typename T>
-void list <T>::push_front(const_reference value) {
-    if (size() >= max_size())
-    throw std::out_of_range("Limit of the container is exceeded");
-  Node<T>* tmp = new Node(value);
-  if (!tmp) throw std::bad_alloc();
-  tmp->prev_ = end_;
-  tmp->next_ = end_->next_;
-  end_->next_->prev_ = tmp;
-  end_->next_ = tmp;
-  size_++;
-}
-
-template <typename T>
-void list <T>::pop_front() {
-  if (empty()) {
-    throw std::invalid_argument("the list is empty");
+    Node<T> *element = pos.ptr_;
+    element->prev_->next_ = element->next_;
+    element->next_->prev_ = element->prev_;
+    delete element;
+    size_--;
   }
-  Node<T>* tmp;
-  tmp = end_->next_;
-  end_->next_ = end_->next_->next_;
-  end_->next_->prev_ = end_;
-  delete tmp;
-  size_--;
-}
 
-template <typename T>
-void list <T>::swap(list& other) {
-  using std::swap;
-  swap(this->size_, other.size_);
-  swap(this->end_, other.end_);
-}
+  template <typename T>
+  void list<T>::push_back(const_reference value)
+  {
+    if (size() >= max_size())
+      throw std::out_of_range("Limit of the container is exceeded");
+    Node<T> *tmp = new Node(value);
+    if (!tmp)
+      throw std::bad_alloc();
+    tmp->next_ = end_;
+    tmp->prev_ = end_->prev_;
+    end_->prev_->next_ = tmp;
+    end_->prev_ = tmp;
+    size_++;
+  }
 
-template <typename T>
-void list <T>::merge(list& other) {
-    if (this != &other) {
-    iterator oit = other.begin();
-    iterator it = begin();
-    while (!other.empty()) {
-      if (it == end()) {
-        insert(it, *oit);
-        other.erase(oit);
-        ++oit;
-      } else if (*oit < *it) {
-        insert(it, *oit);
-        other.erase(oit);
-        ++oit;
-      } else {
-        ++it;
+  template <typename T>
+  void list<T>::pop_back()
+  {
+    if (empty())
+      throw std::invalid_argument("the list is empty");
+    Node<T> *tmp;
+    tmp = end_->prev_;
+    end_->prev_ = end_->prev_->prev_;
+    end_->prev_->next_ = end_;
+    delete tmp;
+    size_--;
+  }
+
+  template <typename T>
+  void list<T>::push_front(const_reference value)
+  {
+    if (size() >= max_size())
+      throw std::out_of_range("Limit of the container is exceeded");
+    Node<T> *tmp = new Node(value);
+    if (!tmp)
+      throw std::bad_alloc();
+    tmp->prev_ = end_;
+    tmp->next_ = end_->next_;
+    end_->next_->prev_ = tmp;
+    end_->next_ = tmp;
+    size_++;
+  }
+
+  template <typename T>
+  void list<T>::pop_front()
+  {
+    if (empty())
+    {
+      throw std::invalid_argument("the list is empty");
+    }
+    Node<T> *tmp;
+    tmp = end_->next_;
+    end_->next_ = end_->next_->next_;
+    end_->next_->prev_ = end_;
+    delete tmp;
+    size_--;
+  }
+
+  template <typename T>
+  void list<T>::swap(list &other)
+  {
+    using std::swap;
+    swap(this->size_, other.size_);
+    swap(this->end_, other.end_);
+  }
+
+  template <typename T>
+  void list<T>::merge(list &other)
+  {
+    if (this != &other)
+    {
+      iterator iter_other = other.begin();
+      iterator iter_this = begin();
+      while (!other.empty())
+      {
+        if (iter_this == end())
+        {
+          insert(iter_this, *iter_other);
+          other.erase(iter_other);
+          ++iter_other;
+        }
+        else if (*iter_other < *iter_this)
+        {
+          insert(iter_this, *iter_other);
+          other.erase(iter_other);
+          ++iter_other;
+        }
+        else
+        {
+          ++iter_this;
+        }
       }
     }
   }
-}
 
-template <typename T>
-void list <T>::splice(const_iterator pos, list& other) {
-    for (iterator iter = other.begin(); iter != other.end(); ++iter) {
-    insert(pos, *iter);
-    other.erase(iter);
+  template <typename T>
+  void list<T>::splice(const_iterator pos, list &other)
+  {
+    for (iterator iter = other.begin(); iter != other.end(); ++iter)
+    {
+      insert(pos, *iter);
+      other.erase(iter);
+    }
   }
-}
 
-template <typename T>
-void list <T>::reverse() {
-    Node<T>* tmp = end_->next_;
-  std::swap(end_->next_, end_->prev_);
-  while (tmp != end_) {
-    std::swap(tmp->prev_, tmp->next_);
-    tmp = tmp->prev_;
+  template <typename T>
+  void list<T>::reverse()
+  {
+    Node<T> *tmp = end_->next_;
+    std::swap(end_->next_, end_->prev_);
+    while (tmp != end_)
+    {
+      std::swap(tmp->prev_, tmp->next_);
+      tmp = tmp->prev_;
+    }
   }
-}
 
-template <typename T>
-void list <T>::unique() {
-    if (!this->empty()) {
-    for (iterator it = this->begin(); it != this->end(); it++) {
-      if (it.ptr_->value_ == it.ptr_->prev_->value_) {
-        iterator del_it = (it - 1);
-        this->erase(del_it);
+  template <typename T>
+  void list<T>::unique()
+  {
+    if (!this->empty())
+    {
+      for (iterator iter = this->begin(); iter != this->end(); iter++)
+      {
+        if (iter.ptr_->value_ == iter.ptr_->prev_->value_)
+        {
+          iterator del_iter = (iter - 1);
+          this->erase(del_iter);
+        }
       }
     }
   }
-}
 
-template <typename T>
-void list <T>::sort() {
-    if (size_ > 1) {
-    quick_sort(begin(), --end());
-}
-}
-
-template <typename T>
-void list <T>::quick_sort(iterator first, iterator last) {
-  if (first == last || first == end_ || last == end_) {
-    return;
-  }
-  iterator pivot = partition(first, last);
-  quick_sort(first, --pivot);
-  quick_sort(++pivot, last);
-}
-
-template <typename T>
-typename list <T>::iterator list <T>::partition(iterator first, iterator last) {
- value_type pivot_value = last.ptr_->value_;
-  iterator i = first;
-  for (iterator j = first; j != last; ++j) {
-    if (j.ptr_->value_ <= pivot_value) {
-      std::swap(i.ptr_->value_, j.ptr_->value_);
-      i++;
+  template <typename T>
+  void list<T>::sort()
+  {
+    if (size_ > 1)
+    {
+      quick_sort(begin(), --end());
     }
   }
-  std::swap(i.ptr_->value_, last.ptr_->value_);
-  return i; 
-}
 
-}  // namespace s21
+  template <typename T>
+  void list<T>::quick_sort(iterator first, iterator last)
+  {
+    if (first == last || first == end_ || last == end_)
+    {
+      return;
+    }
+    iterator iter = partition(first, last);
+    quick_sort(first, --iter);
+    quick_sort(++iter, last);
+  }
+
+  template <typename T>
+  typename list<T>::iterator list<T>::partition(iterator first, iterator last)
+  {
+    value_type pivot_value = last.ptr_->value_;
+    iterator iter = first;
+    for (iterator j = first; j != last; ++j)
+    {
+      if (j.ptr_->value_ <= pivot_value)
+      {
+        std::swap(iter.ptr_->value_, j.ptr_->value_);
+        iter++;
+      }
+    }
+    std::swap(iter.ptr_->value_, last.ptr_->value_);
+    return iter;
+  }
+} // namespace s21
