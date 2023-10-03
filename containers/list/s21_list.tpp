@@ -1,212 +1,293 @@
 #include "s21_list.h"
-namespace s21
-{
-
-  // List Functions
-
-  template <typename value_type>
-  list<value_type>::list() : end_(nullptr) size_(0)
-  {
-  }
-
-  template <typename value_type>
-  list<value_type>::list(size_type n) : end_(nullptr) size_(0)
-  {
-    for (size_type i = 0; i < n; ++i)
-    {
-      push_back(value_type());
-    }
-  }
-
-  template <typename value_type>
-  list<value_type>::list(std::initializer_list<value_type> const &items) : end_(nullptr), size_(0)
-  {
-    for (const value_type &item : items)
-    {
-      push_back(item);
-    }
-  }
-
-  template <typename value_type>
-  list<value_type>::list(const list &l) : end_(nullptr), size_(0)
-  {
-    for (Node *curr = l.end_->next_; curr != nullptr; curr = curr->next_)
-    {
-      push_back(curr->data_);
-    }
-  }
-
-  template <typename value_type>
-  list<value_type>::list(list &&l) : end_(l.end_), size_(l.size_)
-  {
-    l.end_ = nullptr;
-    l.size_ = 0;
-  }
-
-  template <typename value_type>
-  list<value_type>::~list()
-  {
-    clear();
-    delete end_;
-  }
-
-  template <typename value_type>
-  typename list<value_type>::list &list<value_type>::operator=(list &&l)
-  {
-    if (this != &l)
-    {
-      clear();
-      swap(l);
-    }
-    return *this;
-  }
-
-  // List Element access
-  template <typename value_type>
-  typename list<value_type>::const_reference list<value_type>::front() const {
-    if (empty()){
-      throw std::out_of_range("list is empty");
-    } else {
-      return end_->next_->data_;
-    }
-  }
-
-  template <typename value_type>
-  typename list<value_type>::const_reference list<value_type>::back() const {
-    if (empty()) {
-      throw std::out_of_range("list is empty");
-    } else {
-      return end_->data;
-    }
-  }
-
-  // List Capacity
-
-  template <typename value_type>
-  bool list<value_type>::empty() const
-  {
-    return size_ == 0;
-  }
-
-  template <typename value_type>
-  typename list<value_type>::size_type list<value_type>::size()
-  {
-    return size_;
-  }
-
-  template <typename value_type>
-  typename list<value_type>::size_type list<value_type>::max_size()
-  {
-    return std::numeric_limits<size_type>::max();
-  }
-
-  template <typename value_type>
-  void list<value_type>::push_back(const_reference value)
-  {
-    Node *new_node = new Node(value);
-    if (empty())
-    {
-      head_ = new_node;
-      tail_ = new_node;
-    }
-    else
-    {
-      new_node->prev_ = tail_;
-      tail_->next_ = new_node;
-      tail_ = new_node;
-    }
-    size_++;
-  }
-
-  template <typename value_type>
-  void list<value_type>::push_front(const_reference value)
-  {
-    Node *new_node = new Node(value);
-    if (empty())
-    {
-      head_ = new_node;
-      tail_ = new_node;
-    }
-    else
-    {
-      new_node->next_ = head_;
-      head_->prev = new_node;
-      head_ = new_node;
-    }
-    size_++;
-  }
-
-  template <typename value_type>
-  void list<value_type>::pop_back()
-  {
-    if (head_ == nullptr)
-    {
-      throw std::out_of_range("list is empty");
-    }
-    else
-    {
-      Node *node_to_delete = tail_;
-      tail_ = tail_->prev_;
-      if (head_ != nullptr)
-      {
-        tail_->next_ = nullptr;
-      }
-      else
-      {
-        head_ = nullptr;
-        delete node_to_delete;
-        size--;
-      }
-    }
-  }
-
-  template <typename value_type>
-  void list<value_type>::pop_front()
-  {
-    if (tail_ == nullptr)
-    {
-      throw std::out_of_range("list is empty");
-    }
-    else
-    {
-      Node *node_to_delete = head_;
-      head_ = head_->next_;
-      if (tail_ != nullptr)
-      {
-        head_->perv_ = nullptr;
-      }
-      else
-      {
-        tail_ = nullptr;
-        delete node_to_delete;
-        size--;
-      }
-    }
-  }
-
-  // List Modifiers
-
-  template <typename value_type>
-  void list<value_type>::clear()
-  {
-    while (!empty())
-    {
-      pop_back();
-    }
-  }
-  //   iterator insert(iterator pos, const_reference value);
-  //   void erase(iterator pos);
-
-  template <typename value_type>
-  void list<value_type>::swap(list &other)
-  {
-    std::swap(end_, other.end_);
-    std::swap(size_, other.size_);
-  }
-  // void merge(list &other);
-  //   void splice(const_iterator pos, list& other);
-  //   void reverse();
-  //   void unique();
-  //  void sort();
-
+namespace s21 {
+//  List Functions
+template <typename T>
+list <T>::list() : end_(nullptr), size_(0) {
+  initialization();
 }
+
+template <typename T>
+list <T>::list(size_type n) : end_(nullptr), size_(0) {
+if (n >= max_size())
+    throw std::out_of_range("Limit of the container is exceeded");
+  initialization();
+  for (; n > 0; --n) {
+    push_back(this->end_->value_);
+  }
+}
+
+template <typename T>
+list <T>::list(std::initializer_list <T> const& items) : end_(nullptr), size_(0) {
+ initialization();
+  for (const auto& item : items) {
+    push_back(item);
+  }
+}
+
+template <typename T>
+list <T>::list(const list& l) : end_(nullptr), size_(0) {
+ initialization();
+  *this = l;
+}
+
+template <typename T>
+void list <T>::initialization() {
+  end_ = new Node<T>();
+  if (!end_) {
+    throw std::bad_alloc();
+  }
+  end_->next_ = end_;
+  end_->prev_ = end_;
+  size_ = 0;
+}
+
+template <typename T>
+list <T>::list(list&& l) : end_(nullptr), size_(0) {
+    if (this == &l) {
+    throw std::invalid_argument("Error move!");
+  }
+  initialization();
+  swap(l);
+}
+
+template <typename T>
+list <T>::~list() {
+  clear();
+  delete end_;
+}
+
+template <typename T>
+typename list <T>::list& list <T>::operator=(list&& l) {
+  if (this != &l) {
+    clear();
+    swap(l);
+  }
+  return *this;
+}
+
+template <typename T>
+list <T>& list <T>::operator=(const list& other) {
+  if (this != &other) {
+    clear();
+    Node<T>* tmp = other.end_->next_;
+    if (!tmp) {
+      throw std::bad_alloc();
+    }
+    for (size_type i = 0; i < other.size_; ++i) {
+      push_back(tmp->value_);
+      tmp = tmp->next_;
+    }
+  }
+  return *this;
+}
+// List Element access
+
+template <typename T>
+typename list <T>::const_reference list <T>::front() {
+  return this->end_->next_->value_;
+}
+ 
+template <typename T>
+typename list <T>::const_reference list <T>::back() {
+  return this->end_->prev_->value_;
+}
+
+// List Iterators
+template <typename T>
+typename list<T>::iterator list <T>::begin() const {
+ return iterator(this->end_->next_);
+}
+
+template <typename T>
+typename list <T>::iterator list <T>::end() const {
+  return iterator(this->end_);
+}
+
+// List Capacity
+template <typename T>
+bool list <T>::empty() {
+  return size_ == 0;
+}
+
+template <typename T>
+typename list<T>::size_type list <T>::size() {
+  return size_;
+}
+
+template <typename T>
+typename list <T>::size_type list <T>::max_size() {
+  return (std::numeric_limits<size_type>::max() / sizeof(Node<T>) / 2);
+}
+
+// List Modifiers
+template <typename T>
+void list <T>::clear() {
+  while (!empty()) {
+    pop_back();
+  }
+}
+
+template <typename T>
+typename list <T>::iterator list <T>::insert(iterator pos, const_reference value) {
+  Node<T>* element = pos.ptr_;
+  Node<T>* convertion = new Node(value);
+  convertion->next_ = element;
+  convertion->prev_ = element->prev_;
+  element->prev_->next_ = convertion;
+  element->prev_ = convertion;
+  size_++;
+  return iterator(convertion);
+  }
+
+  template <typename T>
+  void list <T>::erase(iterator pos) {
+    if(pos == end()) {
+      throw std::invalid_argument("Invalid argument");
+    }
+  Node<T>* element = pos.ptr_;
+  element->prev_->next_ = element->next_;
+  element->next_->prev_ = element->prev_;
+  delete element;
+  size_--;
+}
+
+template <typename T>
+void list <T>::push_back(const_reference value) {
+    if (size() >= max_size())
+    throw std::out_of_range("Limit of the container is exceeded");
+  Node<T>* tmp = new Node(value);
+  if (!tmp) throw std::bad_alloc();
+  tmp->next_ = end_;
+  tmp->prev_ = end_->prev_;
+  end_->prev_->next_ = tmp;
+  end_->prev_ = tmp;
+  size_++;
+}
+
+template <typename T>
+void list <T>::pop_back() {
+    if (empty()) throw std::invalid_argument("the list is empty");
+  Node<T>* tmp;
+  tmp = end_->prev_;
+  end_->prev_ = end_->prev_->prev_;
+  end_->prev_->next_ = end_;
+  delete tmp;
+  size_--;
+}
+
+template <typename T>
+void list <T>::push_front(const_reference value) {
+    if (size() >= max_size())
+    throw std::out_of_range("Limit of the container is exceeded");
+  Node<T>* tmp = new Node(value);
+  if (!tmp) throw std::bad_alloc();
+  tmp->prev_ = end_;
+  tmp->next_ = end_->next_;
+  end_->next_->prev_ = tmp;
+  end_->next_ = tmp;
+  size_++;
+}
+
+template <typename T>
+void list <T>::pop_front() {
+  if (empty()) {
+    throw std::invalid_argument("the list is empty");
+  }
+  Node<T>* tmp;
+  tmp = end_->next_;
+  end_->next_ = end_->next_->next_;
+  end_->next_->prev_ = end_;
+  delete tmp;
+  size_--;
+}
+
+template <typename T>
+void list <T>::swap(list& other) {
+  using std::swap;
+  swap(this->size_, other.size_);
+  swap(this->end_, other.end_);
+}
+
+template <typename T>
+void list <T>::merge(list& other) {
+    if (this != &other) {
+    iterator oit = other.begin();
+    iterator it = begin();
+    while (!other.empty()) {
+      if (it == end()) {
+        insert(it, *oit);
+        other.erase(oit);
+        ++oit;
+      } else if (*oit < *it) {
+        insert(it, *oit);
+        other.erase(oit);
+        ++oit;
+      } else {
+        ++it;
+      }
+    }
+  }
+}
+
+template <typename T>
+void list <T>::splice(const_iterator pos, list& other) {
+    for (iterator iter = other.begin(); iter != other.end(); ++iter) {
+    insert(pos, *iter);
+    other.erase(iter);
+  }
+}
+
+template <typename T>
+void list <T>::reverse() {
+    Node<T>* tmp = end_->next_;
+  std::swap(end_->next_, end_->prev_);
+  while (tmp != end_) {
+    std::swap(tmp->prev_, tmp->next_);
+    tmp = tmp->prev_;
+  }
+}
+
+template <typename T>
+void list <T>::unique() {
+    if (!this->empty()) {
+    for (iterator it = this->begin(); it != this->end(); it++) {
+      if (it.ptr_->value_ == it.ptr_->prev_->value_) {
+        iterator del_it = (it - 1);
+        this->erase(del_it);
+      }
+    }
+  }
+}
+
+template <typename T>
+void list <T>::sort() {
+    if (size_ > 1) {
+    quick_sort(begin(), --end());
+}
+}
+
+template <typename T>
+void list <T>::quick_sort(iterator first, iterator last) {
+  if (first == last || first == end_ || last == end_) {
+    return;
+  }
+  iterator pivot = partition(first, last);
+  quick_sort(first, --pivot);
+  quick_sort(++pivot, last);
+}
+
+template <typename T>
+typename list <T>::iterator list <T>::partition(iterator first, iterator last) {
+ value_type pivot_value = last.ptr_->value_;
+  iterator i = first;
+  for (iterator j = first; j != last; ++j) {
+    if (j.ptr_->value_ <= pivot_value) {
+      std::swap(i.ptr_->value_, j.ptr_->value_);
+      i++;
+    }
+  }
+  std::swap(i.ptr_->value_, last.ptr_->value_);
+  return i; 
+}
+
+}  // namespace s21
