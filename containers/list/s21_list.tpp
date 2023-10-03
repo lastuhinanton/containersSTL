@@ -289,11 +289,12 @@ namespace s21
   template <typename T>
   void list<T>::reverse()
   {
+    using std::swap;
     Node<T> *tmp = end_->next_;
-    std::swap(end_->next_, end_->prev_);
+    swap(end_->next_, end_->prev_);
     while (tmp != end_)
     {
-      std::swap(tmp->prev_, tmp->next_);
+      swap(tmp->prev_, tmp->next_);
       tmp = tmp->prev_;
     }
   }
@@ -301,14 +302,14 @@ namespace s21
   template <typename T>
   void list<T>::unique()
   {
-    if (!this->empty())
+    if (!empty())
     {
-      for (iterator iter = this->begin(); iter != this->end(); iter++)
+      for (iterator iter = begin(); iter != end(); iter++)
       {
         if (iter.ptr_->value_ == iter.ptr_->prev_->value_)
         {
           iterator del_iter = (iter - 1);
-          this->erase(del_iter);
+          erase(del_iter);
         }
       }
     }
@@ -338,17 +339,18 @@ namespace s21
   template <typename T>
   typename list<T>::iterator list<T>::partition(iterator first, iterator last)
   {
+    using std::swap;
     value_type pivot_value = last.ptr_->value_;
     iterator iter = first;
     for (iterator j = first; j != last; ++j)
     {
       if (j.ptr_->value_ <= pivot_value)
       {
-        std::swap(iter.ptr_->value_, j.ptr_->value_);
+        swap(iter.ptr_->value_, j.ptr_->value_);
         iter++;
       }
     }
-    std::swap(iter.ptr_->value_, last.ptr_->value_);
+    swap(iter.ptr_->value_, last.ptr_->value_);
     return iter;
   }
 } // namespace s21
