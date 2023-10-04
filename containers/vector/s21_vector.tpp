@@ -161,21 +161,9 @@ namespace s21 {
     }
 
     template <class value_type>
-    typename vector<value_type>::const_reference vector<value_type>::front() {
-      if (size_ == 0) { throw std::out_of_range("out of range"); }
-      return vector_[0];
-    }
-
-    template <class value_type>
     typename vector<value_type>::const_reference vector<value_type>::front() const {
       if (size_ == 0) { throw std::out_of_range("out of range"); }
       return vector_[0];
-    }
-
-    template <class value_type>
-    typename vector<value_type>::const_reference vector<value_type>::back() {
-      if (size_ == 0) { throw std::out_of_range("out of range"); }
-      return vector_[size_ - 1];
     }
 
     template <class value_type>

@@ -44,14 +44,12 @@ class vector {
     // Vector Element access
     reference at(size_type pos);
     reference operator[](size_type pos);
-    const_reference front();
-    const_reference back();
+    const_reference front() const;
+    const_reference back() const;
     pointer data();
 
     //Vector Element constant access
     const_reference operator[](size_type pos) const;
-    const_reference front() const;
-    const_reference back() const;
 
     // Vector Iterators
     iterator begin();
@@ -67,7 +65,6 @@ class vector {
     // Vector Modifiers
     void clear();
     iterator insert(iterator pos, const_reference value);
-    // iterator insert(iterator pos, const_reference value);
     void erase(iterator pos);
     void push_back(const_reference value);
     void pop_back();
