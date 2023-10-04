@@ -192,7 +192,8 @@ namespace s21
   template <typename T>
   void list<T>::push_back(const_reference value)
   {
-    if (size() >= max_size()) {
+    if (size() >= max_size())
+    {
       throw std::out_of_range("Limit of the container is exceeded");
     }
     Node<T> *tmp = new Node(value);
@@ -223,11 +224,13 @@ namespace s21
   template <typename T>
   void list<T>::push_front(const_reference value)
   {
-    if (size() >= max_size()) {
+    if (size() >= max_size())
+    {
       throw std::out_of_range("Limit of the container is exceeded");
     }
     Node<T> *tmp = new Node(value);
-    if (!tmp) {
+    if (!tmp)
+    {
       throw std::bad_alloc();
     }
     tmp->prev_ = end_;
@@ -344,7 +347,7 @@ namespace s21
     {
       return;
     }
-   using std::swap;
+    using std::swap;
     value_type pivot_value = last.ptr_->value_;
     iterator iter = first;
     for (iterator j = first; j != last; ++j)
@@ -357,6 +360,6 @@ namespace s21
     }
     swap(iter.ptr_->value_, last.ptr_->value_);
     quick_sort(first, --iter);
-    quick_sort(++iter, last); 
+    quick_sort(++iter, last);
   }
 } // namespace s21
