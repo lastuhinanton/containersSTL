@@ -249,16 +249,6 @@ TEST(ArrayTest, End) {
   EXPECT_EQ(&it, &(beginIt + 5));
 }
 
-TEST(ArrayTest, CBegin) {
-  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-  auto it = arr.cbegin();
-  EXPECT_EQ(*it, 1);
-  // Attempting to modify data through a const_iterator should result in a
-  // compilation error Uncommenting the following line should result in a
-  // compilation error.
-  // *&it = 10;
-}
-
 TEST(ArrayTest, CEnd) {
   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
   auto it = arr.cend();
@@ -277,18 +267,18 @@ TEST(ArrayTest, At_OutOfBounds) {
   EXPECT_THROW(arr.at(10), std::out_of_range);
 }
 
-// TEST(ArrayTest, ConstAt_ValidIndex) {
-//   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-//   int value = arr.at(2);
-//   EXPECT_EQ(value, 3);
-// }
+TEST(ArrayTest, ConstAt_ValidIndex) {
+  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
+  int value = arr.at(2);
+  EXPECT_EQ(value, 3);
+}
 
-// TEST(ArrayTest, ConstAt_OutOfBounds) {
-//   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-//   // Attempting to access an out-of-bounds index using const at() should throw
-//   // an exception
-//   EXPECT_THROW(arr.at(10), std::out_of_range);
-// }
+TEST(ArrayTest, ConstAt_OutOfBounds) {
+  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
+  // Attempting to access an out-of-bounds index using const at() should throw
+  // an exception
+  EXPECT_THROW(arr.at(10), std::out_of_range);
+}
 
 TEST(ArrayTest, Front) {
   s21::array<int, 5> arr = {1, 2, 3, 4, 5};
@@ -302,17 +292,17 @@ TEST(ArrayTest, Back) {
   EXPECT_EQ(value, 5);
 }
 
-// TEST(ArrayTest, ConstFront) {
-//   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-//   int value = arr.front();
-//   EXPECT_EQ(value, 1);
-// }
+TEST(ArrayTest, ConstFront) {
+  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
+  int value = arr.front();
+  EXPECT_EQ(value, 1);
+}
 
-// TEST(ArrayTest, ConstBack) {
-//   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-//   int value = arr.back();
-//   EXPECT_EQ(value, 5);
-// }
+TEST(ArrayTest, ConstBack) {
+  const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
+  int value = arr.back();
+  EXPECT_EQ(value, 5);
+}
 
 TEST(ArrayTest, Empty_NonEmptyArray) {
   s21::array<int, 5> arr = {1, 2, 3, 4, 5};

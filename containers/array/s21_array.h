@@ -39,9 +39,11 @@ class array {
 
     // Array Element access
     reference at(size_type pos);
+    const_reference at(size_type pos) const;
     reference operator[](size_type pos);
-    const_reference front();
-    const_reference back();
+    const_reference operator[](size_type pos) const;
+    const_reference front() const;
+    const_reference back() const;
     pointer data();
 
 

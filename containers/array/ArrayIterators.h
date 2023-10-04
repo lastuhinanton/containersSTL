@@ -36,8 +36,8 @@ class ArrayConstIterator {
 
   public:
     using value_type = T;
-    using pointer = value_type*;
-    using reference = value_type&;
+    using pointer = const value_type*;
+    using reference = const value_type&;
 
     ArrayConstIterator();
     ArrayConstIterator(pointer ptr);

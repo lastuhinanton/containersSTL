@@ -113,18 +113,30 @@ namespace s21 {
       return array_[pos];
     }
 
+
+    template <class value_type, std::size_t N>
+    typename array<value_type, N>::const_reference array<value_type, N>::at(size_type pos) const {
+      if (pos >= N) { throw std::out_of_range("[at]: out of range"); }
+      return array_[pos];
+    }
+
     template <class value_type, std::size_t N>
     typename array<value_type, N>::reference array<value_type, N>::operator[](size_type pos) {
       return at(pos);
     }
 
     template <class value_type, std::size_t N>
-    typename array<value_type, N>::const_reference array<value_type, N>::front() {
+    typename array<value_type, N>::const_reference array<value_type, N>::operator[](size_type pos) const {
+      return at(pos);
+    }
+
+    template <class value_type, std::size_t N>
+    typename array<value_type, N>::const_reference array<value_type, N>::front() const {
       return at(0);
     }
 
     template <class value_type, std::size_t N>
-    typename array<value_type, N>::const_reference array<value_type, N>::back() {
+    typename array<value_type, N>::const_reference array<value_type, N>::back() const {
       return at(N - 1);
     }
 
