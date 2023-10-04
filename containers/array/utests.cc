@@ -275,8 +275,6 @@ TEST(ArrayTest, ConstAt_ValidIndex) {
 
 TEST(ArrayTest, ConstAt_OutOfBounds) {
   const s21::array<int, 5> arr = {1, 2, 3, 4, 5};
-  // Attempting to access an out-of-bounds index using const at() should throw
-  // an exception
   EXPECT_THROW(arr.at(10), std::out_of_range);
 }
 
