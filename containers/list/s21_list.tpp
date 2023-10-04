@@ -135,13 +135,13 @@ namespace s21
 
   // List Capacity
   template <typename T>
-  bool list<T>::empty()
+  bool list<T>::empty() const
   {
     return size_ == 0;
   }
 
   template <typename T>
-  typename list<T>::size_type list<T>::size()
+  typename list<T>::size_type list<T>::size() const
   {
     return size_;
   }

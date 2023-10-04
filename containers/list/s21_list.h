@@ -163,8 +163,8 @@ namespace s21
     const_reference back();
 
     // List Capacity
-    bool empty();
-    size_type size();
+    bool empty() const;
+    size_type size() const;
     size_type max_size();
 
     // List Modifiers
