@@ -103,12 +103,20 @@ namespace s21
   template <typename T>
   typename list<T>::const_reference list<T>::front()
   {
+    if (size_ == 0)
+    {
+      throw std::out_of_range("Front(): the list is empty");
+    }
     return this->end_->next_->value_;
   }
 
   template <typename T>
   typename list<T>::const_reference list<T>::back()
   {
+    if (size_ == 0)
+    {
+      throw std::out_of_range("Front(): the list is empty");
+    }
     return this->end_->prev_->value_;
   }
 
@@ -184,8 +192,9 @@ namespace s21
   template <typename T>
   void list<T>::push_back(const_reference value)
   {
-    if (size() >= max_size())
+    if (size() >= max_size()) {
       throw std::out_of_range("Limit of the container is exceeded");
+    }
     Node<T> *tmp = new Node(value);
     if (!tmp)
       throw std::bad_alloc();
@@ -200,7 +209,9 @@ namespace s21
   void list<T>::pop_back()
   {
     if (empty())
+    {
       throw std::invalid_argument("the list is empty");
+    }
     Node<T> *tmp;
     tmp = end_->prev_;
     end_->prev_ = end_->prev_->prev_;
@@ -212,11 +223,13 @@ namespace s21
   template <typename T>
   void list<T>::push_front(const_reference value)
   {
-    if (size() >= max_size())
+    if (size() >= max_size()) {
       throw std::out_of_range("Limit of the container is exceeded");
+    }
     Node<T> *tmp = new Node(value);
-    if (!tmp)
+    if (!tmp) {
       throw std::bad_alloc();
+    }
     tmp->prev_ = end_;
     tmp->next_ = end_->next_;
     end_->next_->prev_ = tmp;
@@ -308,8 +321,8 @@ namespace s21
       {
         if (iter.ptr_->value_ == iter.ptr_->prev_->value_)
         {
-          iterator del_iter = (iter - 1);
-          erase(del_iter);
+          iterator delete_iter = (iter - 1);
+          erase(delete_iter);
         }
       }
     }
@@ -331,15 +344,7 @@ namespace s21
     {
       return;
     }
-    iterator iter = partition(first, last);
-    quick_sort(first, --iter);
-    quick_sort(++iter, last);
-  }
-
-  template <typename T>
-  typename list<T>::iterator list<T>::partition(iterator first, iterator last)
-  {
-    using std::swap;
+   using std::swap;
     value_type pivot_value = last.ptr_->value_;
     iterator iter = first;
     for (iterator j = first; j != last; ++j)
@@ -351,6 +356,7 @@ namespace s21
       }
     }
     swap(iter.ptr_->value_, last.ptr_->value_);
-    return iter;
+    quick_sort(first, --iter);
+    quick_sort(++iter, last); 
   }
 } // namespace s21
