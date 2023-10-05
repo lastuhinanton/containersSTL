@@ -162,19 +162,19 @@ namespace s21
     }
   }
 
-/*template <typename T>
-void list<T>::clear() {
-  Node<T>* node_ptr = end_->next_;
-  Node<T>* end_node_ptr = end_;
-  while (node_ptr != end_node_ptr) {
-    Node<T>* next_node_ptr = node_ptr->next_;
-    delete node_ptr;
-    node_ptr = next_node_ptr;
-  }
-  end_->next_ = end_;
-  end_->prev_ = end_;
-  size_ = 0;
-}*/
+  /*template <typename T>
+  void list<T>::clear() {
+    Node<T>* node_ptr = end_->next_;
+    Node<T>* end_node_ptr = end_;
+    while (node_ptr != end_node_ptr) {
+      Node<T>* next_node_ptr = node_ptr->next_;
+      delete node_ptr;
+      node_ptr = next_node_ptr;
+    }
+    end_->next_ = end_;
+    end_->prev_ = end_;
+    size_ = 0;
+  }*/
 
   template <typename T>
   typename list<T>::iterator list<T>::insert(iterator pos, const_reference value)
@@ -351,7 +351,7 @@ void list<T>::clear() {
     if (size_ > 1)
     {
       quick_sort(begin(), --end());
-    //  quick_sort(begin(), end());
+      //  quick_sort(begin(), end());
     }
   }
 
@@ -378,36 +378,36 @@ void list<T>::clear() {
     quick_sort(++iter, last);
   }
 
-/*template <typename T>
-void list<T>::quick_sort(iterator begin, iterator end) {
-  // if (begin.ptr_ == end.ptr_) return;
-  value_type pivot = *begin;
-  iterator tmp_iter = begin;
-  ++tmp_iter;
-  iterator new_begin = begin;
+  /*template <typename T>
+  void list<T>::quick_sort(iterator begin, iterator end) {
+    // if (begin.ptr_ == end.ptr_) return;
+    value_type pivot = *begin;
+    iterator tmp_iter = begin;
+    ++tmp_iter;
+    iterator new_begin = begin;
 
-  while (tmp_iter != end) {
-    if (*tmp_iter < pivot) {
-      if (new_begin == begin) new_begin = tmp_iter;
-      begin.ptr_->prev_->next_ = tmp_iter.ptr_;
-      tmp_iter.ptr_->next_->prev_ = begin.ptr_;
+    while (tmp_iter != end) {
+      if (*tmp_iter < pivot) {
+        if (new_begin == begin) new_begin = tmp_iter;
+        begin.ptr_->prev_->next_ = tmp_iter.ptr_;
+        tmp_iter.ptr_->next_->prev_ = begin.ptr_;
 
-      tmp_iter.ptr_->prev_ = begin.ptr_->prev_;
-      begin.ptr_->next_ = tmp_iter.ptr_->next_;
-      
-      tmp_iter.ptr_->next_ = begin.ptr_;
-      begin.ptr_->prev_ = tmp_iter.ptr_;
+        tmp_iter.ptr_->prev_ = begin.ptr_->prev_;
+        begin.ptr_->next_ = tmp_iter.ptr_->next_;
 
-      ++tmp_iter;  // == begin
+        tmp_iter.ptr_->next_ = begin.ptr_;
+        begin.ptr_->prev_ = tmp_iter.ptr_;
+
+        ++tmp_iter;  // == begin
+      }
+      ++tmp_iter;  // == ++begin
     }
-    ++tmp_iter;  // == ++begin
-  }
 
-  //PrintNodes();  // Debugging
-  if (new_begin != begin) quick_sort(new_begin, begin);
-  if (begin.ptr_->next_ != end.ptr_) quick_sort(++begin, end);
-  // QuickSort(new_begin, begin);
-  // QuickSort(++begin, end);
-}*/
+    //PrintNodes();  // Debugging
+    if (new_begin != begin) quick_sort(new_begin, begin);
+    if (begin.ptr_->next_ != end.ptr_) quick_sort(++begin, end);
+    // QuickSort(new_begin, begin);
+    // QuickSort(++begin, end);
+  }*/
 
 } // namespace s21

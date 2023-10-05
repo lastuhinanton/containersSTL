@@ -198,7 +198,6 @@ namespace s21
     // Support
     void initialization();
     void quick_sort(iterator first, iterator last);
-   // void quick_sort(iterator begin, iterator endd);
   };
 
 } // namespace s21

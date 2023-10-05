@@ -45,7 +45,7 @@ namespace s21
       data_ = std::move(q.data_);
       return *this;
     }
- 
+
     // Queue Element access
     const_reference front() { return data_.front(); }
     const_reference back() { return data_.back(); }

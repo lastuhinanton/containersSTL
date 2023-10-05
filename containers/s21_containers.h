@@ -5,5 +5,4 @@
 #include "./queue/s21_queue.h"
 #include "./list/s21_list.tpp"
 
-
-#endif  // S21_CONTAINERS_H
+#endif // S21_CONTAINERS_H
