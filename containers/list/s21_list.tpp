@@ -107,7 +107,7 @@ namespace s21
     {
       throw std::out_of_range("Front(): the list is empty");
     }
-    return this->end_->next_->value_;
+    return end_->next_->value_;
   }
 
   template <typename T>
@@ -117,20 +117,20 @@ namespace s21
     {
       throw std::out_of_range("Front(): the list is empty");
     }
-    return this->end_->prev_->value_;
+    return end_->prev_->value_;
   }
 
   // List Iterators
   template <typename T>
   typename list<T>::iterator list<T>::begin() const
   {
-    return iterator(this->end_->next_);
+    return iterator(end_->next_);
   }
 
   template <typename T>
   typename list<T>::iterator list<T>::end() const
   {
-    return iterator(this->end_);
+    return iterator(end_);
   }
 
   // List Capacity
