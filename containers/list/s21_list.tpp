@@ -362,4 +362,33 @@ namespace s21
     quick_sort(first, --iter);
     quick_sort(++iter, last);
   }
+
+  /*template <typename T>
+  void list<T>::quick_sort(iterator begin, iterator endd)
+  {
+    value_type pivot = *begin;
+    iterator tmp_iter = begin;
+    ++tmp_iter;
+    while (tmp_iter != endd)
+    {
+      if (*tmp_iter < pivot)
+      {
+      begin.ptr_->prev_->next_ = tmp_iter.ptr_;
+      tmp_iter.ptr_->next_->prev_ = begin.ptr_;
+
+      tmp_iter.ptr_->prev_ = begin.ptr_->prev_;
+      begin.ptr_->next_ = tmp_iter.ptr_->next_;
+
+      tmp_iter.ptr_->next_ = begin.ptr_;
+      begin.ptr_->prev_ = tmp_iter.ptr_;
+
+      tmp_iter.ptr_ = begin.ptr_->next_;
+      }
+    }
+    if (++end() != begin)
+      quick_sort(++end(), begin);
+    if (begin != --end())
+      quick_sort(begin, end());
+  }*/
+
 } // namespace s21
