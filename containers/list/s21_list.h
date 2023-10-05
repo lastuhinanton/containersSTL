@@ -197,7 +197,8 @@ namespace s21
   private:
     // Support
     void initialization();
-    void quick_sort(iterator first, iterator las);
+    void quick_sort(iterator first, iterator last);
+   // void quick_sort(iterator begin, iterator endd);
   };
 
 } // namespace s21

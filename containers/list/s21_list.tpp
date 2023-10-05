@@ -162,6 +162,20 @@ namespace s21
     }
   }
 
+/*template <typename T>
+void list<T>::clear() {
+  Node<T>* node_ptr = end_->next_;
+  Node<T>* end_node_ptr = end_;
+  while (node_ptr != end_node_ptr) {
+    Node<T>* next_node_ptr = node_ptr->next_;
+    delete node_ptr;
+    node_ptr = next_node_ptr;
+  }
+  end_->next_ = end_;
+  end_->prev_ = end_;
+  size_ = 0;
+}*/
+
   template <typename T>
   typename list<T>::iterator list<T>::insert(iterator pos, const_reference value)
   {
@@ -337,6 +351,7 @@ namespace s21
     if (size_ > 1)
     {
       quick_sort(begin(), --end());
+    //  quick_sort(begin(), end());
     }
   }
 
@@ -363,32 +378,36 @@ namespace s21
     quick_sort(++iter, last);
   }
 
-  /*template <typename T>
-  void list<T>::quick_sort(iterator begin, iterator endd)
-  {
-    value_type pivot = *begin;
-    iterator tmp_iter = begin;
-    ++tmp_iter;
-    while (tmp_iter != endd)
-    {
-      if (*tmp_iter < pivot)
-      {
+/*template <typename T>
+void list<T>::quick_sort(iterator begin, iterator end) {
+  // if (begin.ptr_ == end.ptr_) return;
+  value_type pivot = *begin;
+  iterator tmp_iter = begin;
+  ++tmp_iter;
+  iterator new_begin = begin;
+
+  while (tmp_iter != end) {
+    if (*tmp_iter < pivot) {
+      if (new_begin == begin) new_begin = tmp_iter;
       begin.ptr_->prev_->next_ = tmp_iter.ptr_;
       tmp_iter.ptr_->next_->prev_ = begin.ptr_;
 
       tmp_iter.ptr_->prev_ = begin.ptr_->prev_;
       begin.ptr_->next_ = tmp_iter.ptr_->next_;
-
+      
       tmp_iter.ptr_->next_ = begin.ptr_;
       begin.ptr_->prev_ = tmp_iter.ptr_;
 
-      tmp_iter.ptr_ = begin.ptr_->next_;
-      }
+      ++tmp_iter;  // == begin
     }
-    if (++end() != begin)
-      quick_sort(++end(), begin);
-    if (begin != --end())
-      quick_sort(begin, end());
-  }*/
+    ++tmp_iter;  // == ++begin
+  }
+
+  //PrintNodes();  // Debugging
+  if (new_begin != begin) quick_sort(new_begin, begin);
+  if (begin.ptr_->next_ != end.ptr_) quick_sort(++begin, end);
+  // QuickSort(new_begin, begin);
+  // QuickSort(++begin, end);
+}*/
 
 } // namespace s21
