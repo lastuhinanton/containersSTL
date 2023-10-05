@@ -17,35 +17,35 @@ namespace s21
     using size_type = std::size_t;
 
     // Queue Member functions
-    queue() { data_.clear(); }
+    queue() : data_() {}
 
     queue(std::initializer_list<value_type> const &items)
     {
       data_.clear();
-      for (const auto &i : items)
+      for (const auto &item : items)
       {
-        push(i);
+        push(item);
       }
     }
 
-    queue(const queue &q) { operator=(q); }
+    queue(const queue &q) : data_(q.data_) {}
 
-    queue(queue &&q) { operator=(std::move(q)); }
+    queue(queue &&q) : data_(std::move(q.data_)) {}
 
-    ~queue() { data_.clear(); }
-
-    queue &operator=(queue &&q)
-    {
-      this->data_ = std::move(q.data_);
-      return *this;
-    }
+    ~queue() {}
 
     queue &operator=(const queue &q)
     {
-      this->data_ = q.data_;
+      data_ = q.data_;
       return *this;
     }
 
+    queue &operator=(queue &&q)
+    {
+      data_ = std::move(q.data_);
+      return *this;
+    }
+ 
     // Queue Element access
     const_reference front() { return data_.front(); }
     const_reference back() { return data_.back(); }
