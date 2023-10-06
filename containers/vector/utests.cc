@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "s21_vector.h"
 
 TEST(S21MatrixTest, DefaultConstructor) {

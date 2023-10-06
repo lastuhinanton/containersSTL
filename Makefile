@@ -34,3 +34,10 @@ rebuild:
 
 leaks:
 	leaks -atExit -- ./test
+
+style:
+	find . -name "*.h" -o -name "*.cc" -o -name "*.tpp" | xargs clang-format --style=google -n
+
+gost:
+	find . -name "*.h" -o -name "*.cc" -o -name "*.tpp" | xargs clang-format --style=google -i
+
