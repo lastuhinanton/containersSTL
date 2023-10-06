@@ -12,7 +12,7 @@ list<T>::list(size_type n) : end_(nullptr), size_(0) {
     throw std::out_of_range("Limit of the container is exceeded");
   initialization();
   for (; n > 0; --n) {
-    push_back(this->end_->value_);
+    push_back(end_->value_);
   }
 }
 
@@ -67,9 +67,6 @@ list<T> &list<T>::operator=(const list &other) {
   if (this != &other) {
     clear();
     Node<T> *tmp = other.end_->next_;
-    if (!tmp) {
-      throw std::bad_alloc();
-    }
     for (size_type i = 0; i < other.size_; ++i) {
       push_back(tmp->value_);
       tmp = tmp->next_;
@@ -104,6 +101,16 @@ typename list<T>::iterator list<T>::begin() const {
 template <typename T>
 typename list<T>::iterator list<T>::end() const {
   return iterator(end_);
+}
+
+template <typename T>
+typename list<T>::const_iterator list<T>::cbegin() const {
+  return const_iterator(end_->next_);
+}
+
+template <typename T>
+typename list<T>::const_iterator list<T>::cend() const {
+  return const_iterator(end_);
 }
 
 // List Capacity
@@ -150,6 +157,22 @@ typename list<T>::iterator list<T>::insert(iterator pos,
   return iterator(new_value);
 }
 
+// template <typename T>
+// typename list<T>::iterator list<T>::insert(iterator pos,
+//                                            const_reference value) {
+//   Node<T>* new_node = new Node;
+//   new_node->prev_ = pos.ptr_->prev_;
+//   new_node->next_ = pos.ptr_;
+//   new_node->value_ = value;
+
+//   pos.ptr_->prev_->next_ = new_node;
+//   pos.ptr_->prev_ = new_node;
+
+//   ++size_;
+
+//   return --pos;
+// }
+
 template <typename T>
 void list<T>::erase(iterator pos) {
   if (pos == end()) {
@@ -168,7 +191,6 @@ void list<T>::push_back(const_reference value) {
     throw std::out_of_range("Limit of the container is exceeded");
   }
   Node<T> *tmp = new Node(value);
-  if (!tmp) throw std::bad_alloc();
   tmp->next_ = end_;
   tmp->prev_ = end_->prev_;
   end_->prev_->next_ = tmp;
@@ -195,9 +217,6 @@ void list<T>::push_front(const_reference value) {
     throw std::out_of_range("Limit of the container is exceeded");
   }
   Node<T> *tmp = new Node(value);
-  if (!tmp) {
-    throw std::bad_alloc();
-  }
   tmp->prev_ = end_;
   tmp->next_ = end_->next_;
   end_->next_->prev_ = tmp;
@@ -248,8 +267,9 @@ void list<T>::merge(list &other) {
 
 template <typename T>
 void list<T>::splice(const_iterator pos, list &other) {
+  iterator tmp_iter(pos.ptr_);
   for (iterator iter = other.begin(); iter != other.end(); ++iter) {
-    insert(pos, *iter);
+    insert(tmp_iter, *iter);
     other.erase(iter);
   }
 }
@@ -310,5 +330,38 @@ void list<T>::quick_sort(iterator begin, iterator end) {
   if (new_begin != begin) quick_sort(new_begin, begin);
   if (begin.ptr_->next_ != end.ptr_) quick_sort(++begin, end);
 }
+
+template <typename T>
+template <typename... Args>
+typename list<T>::iterator list<T>::InsertMany(const_iterator pos,
+                                               Args &&...args) {
+  iterator tmp_iter(pos.ptr_);
+  (insert(tmp_iter, std::forward<Args>(args)), ...);
+  return --tmp_iter;
+}
+
+template <typename T>
+template <typename... Args>
+void list<T>::InsertManyBack(Args &&...args) {
+  (insert(end(), std::forward<Args>(args)), ...);
+}
+
+template <typename T>
+template <typename... Args>
+void list<T>::InsertManyFront(Args &&...args) {
+  iterator tmp_iter = begin();
+  (insert(tmp_iter, std::forward<Args>(args)), ...);
+}
+
+// template <typename T>
+// std::ostream& operator<<(std::ostream& out, const list<T>& list) {
+//   typename list<T>::const_iterator end = list.end();
+//   for (typename list<T>::const_iterator iter = list.begin(); iter != end;
+//        ++iter) {
+//     out << *iter << ' ';
+//   }
+//   out << std::endl;
+//   return out;
+// }
 
 }  // namespace s21

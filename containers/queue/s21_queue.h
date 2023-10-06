@@ -53,6 +53,11 @@ class queue {
   void pop() { data_.pop_front(); }
   void swap(queue &other) { data_.swap(other.data_); }
 
+  template <typename... Args>
+  void InsertManyBack(Args &&...args) {
+    data_.InsertManyBack();
+  }
+
  private:
   list<T> data_;
 };

@@ -29,6 +29,77 @@ bool compare_lists(s21::list<value_type> my_list,
   return result;
 }
 
+TEST(ListTest, InsertMany) {
+  s21::list<int> my_list{4, 5, 6, 24};
+
+  auto it = my_list.InsertMany(my_list.cbegin(), 1, 2, 3);
+
+  ASSERT_EQ(*it, 3);  // Проверка возвращаемого значения
+
+  std::vector<int> expected{1, 2, 3, 4, 5, 6, 24};
+  std::vector<int> actual;
+  for (const auto& element : my_list) {
+    actual.push_back(element);
+  }
+  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+}
+
+TEST(ListTest, InsertManyEmpty) {
+  s21::list<int> my_list;
+
+  auto it = my_list.InsertMany(my_list.cbegin(), 1, 4, 78);
+
+  ASSERT_EQ(*it, 78);  // Проверка возвращаемого значения
+
+  std::vector<int> expected{1, 4, 78};
+  std::vector<int> actual;
+  for (const auto& element : my_list) {
+    actual.push_back(element);
+  }
+  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+}
+
+TEST(ListTest, InsertManyBack) {
+  s21::list<int> my_list{4, 5, 6, 24};
+
+  my_list.InsertManyBack(4, 5);
+
+  std::vector<int> expected{4, 5, 6, 24, 4, 5};
+  std::vector<int> actual;
+  for (const auto& element : my_list) {
+    actual.push_back(element);
+  }
+  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+}
+
+TEST(ListTest, InsertManyFront) {
+  s21::list<int> my_list{4, 5, 6, 24};
+
+  my_list.InsertManyFront(1, 2);
+
+  std::vector<int> expected{1, 2, 4, 5, 6, 24};
+  std::vector<int> actual;
+  for (const auto& element : my_list) {
+    actual.push_back(element);
+  }
+  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+}
+
+TEST(ListTest, Cbegin) {
+  s21::list<int> my_list{4, 5, 6};
+  auto it = my_list.cbegin();
+
+  ASSERT_EQ(*it, 4);  // Проверка возвращаемого значения
+  ASSERT_EQ(&(*it), &my_list.front());  // Проверка ссылки на элемент в списке
+}
+
+// TEST(ListTest, Cend) {
+//   s21::list<int> my_list{4, 5, 6};
+//   auto it = my_list.cend();
+
+//   ASSERT_EQ(*it, my_list.end()); // Проверка возвращаемого значения
+// }
+
 TEST(ListTest, CompareLists) {
   s21::list<int> my_list{1, 2, 3, 4, 5};
   std::list<int> std_list{1, 2, 3, 4, 5};
@@ -71,7 +142,7 @@ TEST(ListTest, SizeConstructorThrow) {
   try {
     s21::list<int> my_list(-1);
     FAIL() << "Expected std::out_of_range";
-  } catch (std::out_of_range const &err) {
+  } catch (std::out_of_range const& err) {
     EXPECT_EQ(err.what(), std::string("Limit of the container is exceeded"));
   }
 }
@@ -402,7 +473,7 @@ TEST(ListTest, Unique_3) {
 TEST(ListTest, Splice_1) {
   s21::list<int> my_list1{1, 9999, 20000};
   s21::list<int> my_list2{500, 15000, 30000};
-  my_list1.splice(my_list1.begin(), my_list2);
+  my_list1.splice(my_list1.cbegin(), my_list2);
 
   std::list<int> std_list1{1, 9999, 20000};
   std::list<int> std_list2{500, 15000, 30000};
@@ -413,7 +484,7 @@ TEST(ListTest, Splice_1) {
 TEST(ListTest, Splice_2) {
   s21::list<int> my_list1;
   s21::list<int> my_list2{500, 15000, 30000};
-  my_list1.splice(my_list1.begin(), my_list2);
+  my_list1.splice(my_list1.cbegin(), my_list2);
 
   std::list<int> std_list1;
   std::list<int> std_list2{500, 15000, 30000};
@@ -424,7 +495,7 @@ TEST(ListTest, Splice_2) {
 TEST(ListTest, Splice_3) {
   s21::list<int> my_list1{1, 9999, 20000};
   s21::list<int> my_list2;
-  my_list1.splice(my_list1.begin(), my_list2);
+  my_list1.splice(my_list1.cbegin(), my_list2);
 
   std::list<int> std_list1{1, 9999, 20000};
   std::list<int> std_list2;
@@ -435,7 +506,7 @@ TEST(ListTest, Splice_3) {
 TEST(ListTest, Splice_4) {
   s21::list<int> my_list1;
   s21::list<int> my_list2;
-  my_list1.splice(my_list1.begin(), my_list2);
+  my_list1.splice(my_list1.cbegin(), my_list2);
 
   std::list<int> std_list1;
   std::list<int> std_list2;
@@ -1247,7 +1318,7 @@ TEST(StackTest, Swap_6) {
   EXPECT_EQ(s21_stack_swap.top(), std_stack_swap.top());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

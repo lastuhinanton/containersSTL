@@ -52,10 +52,14 @@ class stack {
   void pop() { data_.pop_front(); }
   void swap(stack &other) { data_.swap(other.data_); }
 
+  template <typename... Args>
+  void InsertManyFront(Args &&...args) {
+    data_.InsertManyBack();
+  }
+
  private:
   list<T> data_;
 };
 }  // namespace s21
 
 #endif  // S21_STACK_H
- 

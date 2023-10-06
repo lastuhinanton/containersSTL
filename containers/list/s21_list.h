@@ -18,6 +18,10 @@ struct Node {
 
   Node(const T &value) : value_(value), prev_(nullptr), next_(nullptr) {}
   Node() : value_(), prev_(nullptr), next_(nullptr) {}
+  // Node(Args&&... args) : value_(std::forward<Args>(args)...), prev_(nullptr),
+  // next_(nullptr) {}
+  // Node(Arg1&& arg1, Arg2&& arg2) : value_(std::forward<Arg1>(arg1),
+  // std::forward<Arg2>(arg2)), prev_(nullptr), next_(nullptr) {}
 };
 
 template <typename T>
@@ -30,11 +34,14 @@ class ListIterator {
   using size_type = std::size_t;
   friend class list<T>;
 
-  ListIterator() { ptr_ = nullptr; }
+  ListIterator() {}
   ListIterator(Node<T> *ptr) : ptr_(ptr){};
+  // ListIterator(Node<T> *ptr) {
+  //   ptr_ = ptr;
+  // }
 
   reference operator*() {
-    if (!this->ptr_) {
+    if (this->ptr_ == nullptr) {
       throw std::invalid_argument("Value is nullptr");
     }
     return this->ptr_->value_;
@@ -79,23 +86,42 @@ class ListIterator {
     return res;
   }
 
-  bool operator==(ListIterator other) { return this->ptr_ == other.ptr_; }
+  bool operator==(ListIterator other) const { return this->ptr_ == other.ptr_; }
   bool operator!=(ListIterator other) { return this->ptr_ != other.ptr_; }
 
  private:
-  Node<T> *ptr_ = nullptr;
+  Node<T> *ptr_;
 };
 
 template <typename T>
-class ListConstIterator : public ListIterator<T> {
+class ListConstIterator {
  public:
-  friend class list<T>;
-  using iterator = ListIterator<T>;
-  using reference = T &;
+  //  List Member type
+  using value_type = T;
+  using const_reference = const T &;
   using const_iterator = ListConstIterator<T>;
+  using size_type = std::size_t;
+  friend class list<T>;
 
-  ListConstIterator(ListIterator<T> other) : ListIterator<T>(other) {}
-  const T &operator*() { return ListIterator<T>::operator*(); }
+  ListConstIterator() {}
+  ListConstIterator(Node<T> *ptr) : ptr_(ptr){};
+
+  const_reference operator*() {
+    if (this->ptr_ == nullptr) {
+      throw std::invalid_argument("Value is nullptr");
+    }
+    return this->ptr_->value_;
+  }
+
+  ListConstIterator operator++(int) {
+    ptr_ = ptr_->next_;
+    return *this;
+  }
+
+  ListConstIterator operator--(int) {
+    ptr_ = ptr_->prev_;
+    return *this;
+  }
 
   ListConstIterator &operator++() {
     ptr_ = ptr_->next_;
@@ -107,11 +133,32 @@ class ListConstIterator : public ListIterator<T> {
     return *this;
   }
 
-  bool operator==(ListConstIterator other) { return this->ptr_ == other.ptr_; }
+  ListConstIterator operator+(const size_type value) {
+    Node<T> *tmp = ptr_;
+    for (size_type i = 0; i < value; i++) {
+      tmp = tmp->next_;
+    }
+
+    ListConstIterator res(tmp);
+    return res;
+  }
+
+  ListConstIterator operator-(const size_type value) {
+    Node<T> *tmp = ptr_;
+    for (size_type i = 0; i < value; i++) {
+      tmp = tmp->prev_;
+    }
+    ListConstIterator res(tmp);
+    return res;
+  }
+
+  bool operator==(ListConstIterator other) const {
+    return this->ptr_ == other.ptr_;
+  }
   bool operator!=(ListConstIterator other) { return this->ptr_ != other.ptr_; }
 
  private:
-  Node<T> *ptr_ = nullptr;
+  Node<T> *ptr_;
 };
 
 template <typename T>
@@ -163,11 +210,18 @@ class list {
   using iterator = ListIterator<T>;
   using const_iterator = ListConstIterator<T>;
 
+  template <typename... Args>
+  iterator InsertMany(const_iterator pos, Args &&...args);
+  template <typename... Args>
+  void InsertManyBack(Args &&...args);
+  template <typename... Args>
+  void InsertManyFront(Args &&...args);
+
   // List Iterators
   iterator begin() const;
   iterator end() const;
-  // const_iterator begin() const;
-  // const_iterator end() const;
+  const_iterator cbegin() const;
+  const_iterator cend() const;
 
   // List Modifiers
   iterator insert(iterator pos, const_reference value);
@@ -178,8 +232,13 @@ class list {
   // Support
   void initialization();
   void quick_sort(iterator first, iterator last);
+  // void Transfer(iterator position, iterator first, iterator last);
 };
 
+template <typename T>
+std::ostream &operator<<(std::ostream &out, const list<T> &list);
+
 }  // namespace s21
+// #include "s21_list.tpp"
 
 #endif  // S21_LIST_H
