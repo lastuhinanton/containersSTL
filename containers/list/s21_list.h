@@ -18,10 +18,6 @@ struct Node {
 
   Node(const T &value) : value_(value), prev_(nullptr), next_(nullptr) {}
   Node() : value_(), prev_(nullptr), next_(nullptr) {}
-  // Node(Args&&... args) : value_(std::forward<Args>(args)...), prev_(nullptr),
-  // next_(nullptr) {}
-  // Node(Arg1&& arg1, Arg2&& arg2) : value_(std::forward<Arg1>(arg1),
-  // std::forward<Arg2>(arg2)), prev_(nullptr), next_(nullptr) {}
 };
 
 template <typename T>
@@ -232,13 +228,8 @@ class list {
   // Support
   void initialization();
   void quick_sort(iterator first, iterator last);
-  // void Transfer(iterator position, iterator first, iterator last);
 };
 
-template <typename T>
-std::ostream &operator<<(std::ostream &out, const list<T> &list);
-
 }  // namespace s21
-// #include "s21_list.tpp"
 
 #endif  // S21_LIST_H

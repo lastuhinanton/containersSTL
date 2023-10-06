@@ -34,14 +34,14 @@ TEST(ListTest, InsertMany) {
 
   auto it = my_list.InsertMany(my_list.cbegin(), 1, 2, 3);
 
-  ASSERT_EQ(*it, 3);  // Проверка возвращаемого значения
+  ASSERT_EQ(*it, 3);
 
   std::vector<int> expected{1, 2, 3, 4, 5, 6, 24};
   std::vector<int> actual;
   for (const auto& element : my_list) {
     actual.push_back(element);
   }
-  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+  ASSERT_EQ(actual, expected);
 }
 
 TEST(ListTest, InsertManyEmpty) {
@@ -49,14 +49,14 @@ TEST(ListTest, InsertManyEmpty) {
 
   auto it = my_list.InsertMany(my_list.cbegin(), 1, 4, 78);
 
-  ASSERT_EQ(*it, 78);  // Проверка возвращаемого значения
+  ASSERT_EQ(*it, 78);
 
   std::vector<int> expected{1, 4, 78};
   std::vector<int> actual;
   for (const auto& element : my_list) {
     actual.push_back(element);
   }
-  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+  ASSERT_EQ(actual, expected);
 }
 
 TEST(ListTest, InsertManyBack) {
@@ -69,7 +69,7 @@ TEST(ListTest, InsertManyBack) {
   for (const auto& element : my_list) {
     actual.push_back(element);
   }
-  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+  ASSERT_EQ(actual, expected);
 }
 
 TEST(ListTest, InsertManyFront) {
@@ -82,23 +82,16 @@ TEST(ListTest, InsertManyFront) {
   for (const auto& element : my_list) {
     actual.push_back(element);
   }
-  ASSERT_EQ(actual, expected);  // Проверка содержимого списка
+  ASSERT_EQ(actual, expected);
 }
 
 TEST(ListTest, Cbegin) {
   s21::list<int> my_list{4, 5, 6};
   auto it = my_list.cbegin();
 
-  ASSERT_EQ(*it, 4);  // Проверка возвращаемого значения
-  ASSERT_EQ(&(*it), &my_list.front());  // Проверка ссылки на элемент в списке
+  ASSERT_EQ(*it, 4);
+  ASSERT_EQ(&(*it), &my_list.front());
 }
-
-// TEST(ListTest, Cend) {
-//   s21::list<int> my_list{4, 5, 6};
-//   auto it = my_list.cend();
-
-//   ASSERT_EQ(*it, my_list.end()); // Проверка возвращаемого значения
-// }
 
 TEST(ListTest, CompareLists) {
   s21::list<int> my_list{1, 2, 3, 4, 5};

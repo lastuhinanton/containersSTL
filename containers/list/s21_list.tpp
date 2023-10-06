@@ -157,22 +157,6 @@ typename list<T>::iterator list<T>::insert(iterator pos,
   return iterator(new_value);
 }
 
-// template <typename T>
-// typename list<T>::iterator list<T>::insert(iterator pos,
-//                                            const_reference value) {
-//   Node<T>* new_node = new Node;
-//   new_node->prev_ = pos.ptr_->prev_;
-//   new_node->next_ = pos.ptr_;
-//   new_node->value_ = value;
-
-//   pos.ptr_->prev_->next_ = new_node;
-//   pos.ptr_->prev_ = new_node;
-
-//   ++size_;
-
-//   return --pos;
-// }
-
 template <typename T>
 void list<T>::erase(iterator pos) {
   if (pos == end()) {
@@ -352,16 +336,5 @@ void list<T>::InsertManyFront(Args &&...args) {
   iterator tmp_iter = begin();
   (insert(tmp_iter, std::forward<Args>(args)), ...);
 }
-
-// template <typename T>
-// std::ostream& operator<<(std::ostream& out, const list<T>& list) {
-//   typename list<T>::const_iterator end = list.end();
-//   for (typename list<T>::const_iterator iter = list.begin(); iter != end;
-//        ++iter) {
-//     out << *iter << ' ';
-//   }
-//   out << std::endl;
-//   return out;
-// }
 
 }  // namespace s21
